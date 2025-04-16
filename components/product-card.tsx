@@ -5,6 +5,7 @@ import { Heart } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { decodeString } from "@/lib/decode-utils"
 import { cn } from "@/lib/utils"
 
 export interface ProductCardProps {
@@ -35,6 +36,7 @@ export function ProductCard({
   onAddToCart,
   className,
 }: ProductCardProps) {
+  const decodedTitle = decodeString(title)
   return (
     <Card className={cn("overflow-hidden", className)}>
       <div className="relative">
@@ -75,7 +77,7 @@ export function ProductCard({
 
       {/* Product info */}
       <CardContent className="p-0">
-        <h3 className="text-sm font-medium mb-5 mt-4 truncate">{title}</h3>
+        <h3 className="text-sm font-medium mb-5 mt-4 truncate">{decodedTitle}</h3>
         <p className="text-base font-semibold">
           {currency} {price}
         </p>
