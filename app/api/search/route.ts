@@ -9,7 +9,9 @@ export async function GET(request: NextRequest) {
   const baseUrl = `${process.env.API_BASE_URL}search/keyword`;
 
   // Forward all query parameters
-  const apiUrl = `${baseUrl}?${searchParams.toString()}`;
+  const apiUrl = `${baseUrl}?${searchParams.toString()}&random=${Math.floor(
+    Math.random() * 1e8
+  )}`;
 
   try {
     const response = await fetch(apiUrl, {

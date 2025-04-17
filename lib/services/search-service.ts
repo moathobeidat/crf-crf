@@ -21,7 +21,9 @@ export async function searchProducts(
   if (params.maxPrice !== undefined)
     queryParams.append("maxPrice", params.maxPrice.toString());
 
-  const url = `${API_BASE_URL}?${queryParams.toString()}`;
+  const url = `${API_BASE_URL}?${queryParams.toString()}&random=${Math.floor(
+    Math.random() * 1e8
+  )}`;
 
   const response = await fetch(url, {
     method: "GET",

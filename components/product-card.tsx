@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Heart } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { decodeString } from "@/lib/decode-utils"
-import { cn } from "@/lib/utils"
+import Image from "next/image";
+import { Heart } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { decodeString } from "@/lib/decode-utils";
+import { cn } from "@/lib/utils";
 
 export interface ProductCardProps {
-  id: string
-  title: string
-  price: string
-  currency?: string
-  imageUrl: string
+  id: string;
+  title: string;
+  price: string;
+  currency?: string;
+  imageUrl: string;
   badges?: Array<{
-    text: string
-    variant?: "default" | "secondary" | "destructive" | "outline"
-  }>
-  isFavorite?: boolean
-  onToggleFavorite?: (id: string) => void
-  onAddToCart?: (id: string) => void
-  className?: string
+    text: string;
+    variant?: "default" | "secondary" | "destructive" | "outline";
+  }>;
+  isFavorite?: boolean;
+  onToggleFavorite?: (id: string) => void;
+  onAddToCart?: (id: string) => void;
+  className?: string;
 }
 
 export function ProductCard({
@@ -36,7 +36,7 @@ export function ProductCard({
   onAddToCart,
   className,
 }: ProductCardProps) {
-  const decodedTitle = decodeString(title)
+  const decodedTitle = decodeString(title);
   return (
     <Card className={cn("overflow-hidden", className)}>
       <div className="relative">
@@ -47,13 +47,22 @@ export function ProductCard({
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
           <Heart
-            className={cn("w-5 h-5 transition-colors", isFavorite ? "fill-blue-600 text-blue-600" : "text-blue-600")}
+            className={cn(
+              "w-5 h-5 transition-colors",
+              isFavorite ? "fill-blue-600 text-blue-600" : "text-blue-600"
+            )}
           />
         </button>
 
         {/* Product image */}
         <div className="relative aspect-[4/3.3] w-full bg-white p-4">
-          <Image src={imageUrl || "/placeholder.svg"} alt={title} fill className="p-8 object-contain scale-100 hover:scale-110 ease-in duration-200" priority />
+          <Image
+            src={imageUrl || "/placeholder.svg"}
+            alt={title}
+            fill
+            className="p-8 object-contain scale-100 hover:scale-110 ease-in duration-200"
+            priority
+          />
         </div>
 
         {/* Badges */}
@@ -65,7 +74,9 @@ export function ProductCard({
                 variant={badge.variant || "default"}
                 className={cn(
                   "text-tiny font-semibold px-2 rounded-none",
-                  badge.variant === "default" ? "bg-yellow-400 hover:bg-yellow-400 text-white" : "",
+                  badge.variant === "default"
+                    ? "bg-yellow-400 hover:bg-yellow-400 text-white"
+                    : ""
                 )}
               >
                 {badge.text}
@@ -77,17 +88,22 @@ export function ProductCard({
 
       {/* Product info */}
       <CardContent className="p-0">
-        <h3 className="text-sm font-medium mb-5 mt-4 truncate">{decodedTitle}</h3>
+        <h3 className="text-sm font-medium mb-5 mt-4 truncate">
+          {decodedTitle}
+        </h3>
         <p className="text-base font-semibold">
           {currency} {price}
         </p>
       </CardContent>
 
       <CardFooter className="p-0 mt-3">
-        <Button onClick={() => onAddToCart?.(id)} className="font-semibold w-full bg-orange-500 hover:bg-white border-1 text-black h-12 text-sm">
+        <Button
+          onClick={() => onAddToCart?.(id)}
+          className="font-semibold w-full bg-orange-500 hover:bg-white border-1 text-black h-12 text-sm"
+        >
           Add to Bag
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }

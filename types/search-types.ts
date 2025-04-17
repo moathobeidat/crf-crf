@@ -17,6 +17,18 @@ export interface Category {
   name_ar?: string;
 }
 
+export interface PromoBadge {
+  id: string;
+  placement: string;
+  priority: number;
+  type: string;
+  text: {
+    boldText: string;
+    normalText: string;
+  };
+  seller: string;
+}
+
 export interface Brand {
   id: string;
   name: string;
@@ -101,6 +113,7 @@ export interface Product {
   stock: Stock;
   unit: Unit;
   links: Links;
+  promoBadges: PromoBadge[];
 }
 
 export interface FacetValue {

@@ -32,8 +32,8 @@ export default function Home() {
       price: product.price.formattedValue.replace(/[^0-9,.]/g, ""),
       currency: product.price.currency,
       imageUrl: product.links.defaultImages[0] || "/placeholder.png",
-      badges: product.category.slice(0, 1).map((offer) => ({
-        text: offer.name || "NEW",
+      badges: product.promoBadges.map((badge) => ({
+        text: badge.text.boldText || "NEW",
         variant: "default",
       })),
       isFavorite: !!favorites[product.id],
