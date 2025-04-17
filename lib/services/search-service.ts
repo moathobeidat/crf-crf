@@ -29,6 +29,8 @@ export async function searchProducts(
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "Netlify-CDN-Cache-Control": "public, max-age=0, must-revalidate",
     },
   });
 
