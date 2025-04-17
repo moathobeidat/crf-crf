@@ -21,7 +21,9 @@ export async function GET(request: NextRequest) {
         storeid: "mafuae",
         lang: "en",
         userid: `${process.env.USER_ID}`,
-        "x-retail-api-key": `${process.env.API_RETAIL_API_KEY}`, // Store this in .env
+        "x-retail-api-key": `${process.env.API_RETAIL_API_KEY}`,
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "Netlify-CDN-Cache-Control": "public, max-age=0, must-revalidate",
       },
     });
 
