@@ -70,8 +70,8 @@ export function ProductCarousel({ products, onToggleFavorite, onAddToCart, class
       >
         <CarouselContent className="-ml-4">
           {products.map((product) => (
-            <CarouselItem key={product.id} className="pl-6 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-              <div className="p-1">
+            <CarouselItem key={product.id} className="pl-8 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <div>
                 <ProductCard {...product} onToggleFavorite={onToggleFavorite} onAddToCart={onAddToCart} />
               </div>
             </CarouselItem>
