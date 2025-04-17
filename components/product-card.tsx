@@ -55,7 +55,7 @@ export function ProductCard({
         </button>
 
         {/* Product image */}
-        <div className="relative lg:aspect-[4/3.4] aspect-[4/3.85] w-full bg-white p-4">
+        <div className="relative aspect-[4/4.8] w-full bg-white p-4">
           <Image
             src={imageUrl || "/placeholder.svg"}
             alt={title}
