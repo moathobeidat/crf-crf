@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { decodeString } from "@/lib/decode-utils";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export interface ProductCardProps {
   id: string;
@@ -25,6 +25,7 @@ export interface ProductCardProps {
   onToggleFavorite?: (id: string) => void;
   onAddToCart?: (id: string) => void;
   className?: string;
+  isTransitioning?: boolean;
 }
 
 export function ProductCard({
@@ -40,21 +41,34 @@ export function ProductCard({
   onToggleFavorite,
   onAddToCart,
   className,
+  isTransitioning = false,
 }: ProductCardProps) {
   const [currentTheme, setCurrentTheme] = useState<string>("lululemon");
   const [mounted, setMounted] = useState(false);
+  const previousThemeRef = useRef<string>("lululemon");
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
     const theme = document.documentElement.getAttribute("data-theme") || "lululemon";
     setCurrentTheme(theme);
+    previousThemeRef.current = theme;
 
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === "attributes" && mutation.attributeName === "data-theme") {
           const newTheme = document.documentElement.getAttribute("data-theme");
           if (newTheme) {
+            // If switching TO lego, prepare the card for transition
+            if (newTheme === "lego" && previousThemeRef.current !== "lego") {
+              // Pre-apply some lego styles to make transition smoother
+              if (cardRef.current) {
+                cardRef.current.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+              }
+            }
+
             setCurrentTheme(newTheme);
+            previousThemeRef.current = newTheme;
           }
         }
       });
@@ -69,14 +83,55 @@ export function ProductCard({
 
   const decodedTitle = decodeString(title);
   const showAddToCartButton = currentTheme === "lego" && mounted; // Only show Add to Bag for LEGO
+  const hasDiscount = !!originalPrice;
+
+  // Apply title height if it's been set externally
 
   if (!mounted) {
     // Return a skeleton or simplified version during SSR
     return <Card className={cn("overflow-hidden product-card", className)}></Card>;
   }
 
+  // Render the custom heart icon for THAT theme, or the default Heart component for other themes
+  const renderHeartIcon = () => {
+    if (currentTheme === "that") {
+      return (
+        <div className={cn("that-heart-icon", isFavorite ? "is-favorite" : "")}>
+          <Image
+            src="/images/that-heart-icon.svg"
+            alt="Favorite"
+            width={28}
+            height={28}
+            className="that-heart-svg"
+          />
+        </div>
+      );
+    } else if (currentTheme === "lululemon") {
+      return (
+        <div className={cn("lululemon-heart-icon", isFavorite ? "is-favorite" : "")}>
+          <Image
+            src="/images/wishlist.svg"
+            alt="Favorite"
+            width={24}
+            height={24}
+            className="lululemon-heart-svg"
+          />
+        </div>
+      );
+    } else {
+      return <Heart className={cn("heart-icon", isFavorite ? "is-favorite" : "")} />;
+    }
+  };
+
   return (
-    <Card className={cn("overflow-hidden product-card", className)}>
+    <Card
+      ref={cardRef}
+      className={cn(
+        "overflow-hidden product-card",
+        className,
+        isTransitioning && "theme-transition-active"
+      )}
+    >
       <div className="relative product-image-container">
         {/* Favorite button - now shown for all themes */}
         <button
@@ -84,7 +139,7 @@ export function ProductCard({
           className="favorite-button"
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
-          <Heart className={cn("heart-icon", isFavorite ? "is-favorite" : "")}/>
+          {renderHeartIcon()}
         </button>
 
         {/* Product image */}
@@ -102,7 +157,12 @@ export function ProductCard({
         {badges.length > 0 && (
           <div className="product-badges">
             {badges.map((badge, index) => (
-              <Badge key={index} variant={badge.variant || "default"} className="product-badge">
+              <Badge
+                key={index}
+                variant={badge.variant || "default"}
+                className="product-badge"
+                data-badge-type={badge.text.toLowerCase() === "sale" ? "sale" : undefined}
+              >
                 {badge.text}
               </Badge>
             ))}
@@ -114,9 +174,11 @@ export function ProductCard({
       <CardContent className="product-content">
         {/* Show brand name only for THAT theme */}
         {currentTheme === "that" && brand && (
-          <p className="product-brand uppercase mt-4 text-muted-foreground">{brand}</p>
+          <p className="product-brand uppercase mt-5 text-muted-foreground">{brand}</p>
         )}
-        <h3 className="product-title">{decodedTitle}</h3>
+        <h3 className="product-title" data-title-id={id}>
+          {decodedTitle}
+        </h3>
 
         {/* Price container with theme-specific alignment */}
         <div
@@ -125,7 +187,12 @@ export function ProductCard({
             currentTheme === "that" ? "justify-center" : "justify-start"
           )}
         >
-          <p className="product-price">
+          <p
+            className={cn(
+              "product-price",
+              currentTheme === "that" && hasDiscount && "that-discounted-price"
+            )}
+          >
             {currency} {price}
           </p>
           {originalPrice && (

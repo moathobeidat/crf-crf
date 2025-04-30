@@ -162,12 +162,11 @@
     --product-price-font-size: 1rem;
     --product-price-font-weight: 500;
     --product-price-color: var(--foreground);
-    
+
     --product-original-price-text-size: 1.1875rem;
     --product-original-price-text-decoration: line-through;
     --product-original-price-padding: 0;
     --product-original-price-color: hsl(0deg 0% 58.43%);
-
 
     /* Favorite button variables */
     --favorite-button-bg: transparent;
@@ -205,9 +204,17 @@
     --badge-text-transform: uppercase;
   }
 
+  /* Add a new class for the transitioning state */
+  .theme-transitioning * {
+    transition-duration: 0.5s !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
   /* Add smooth theme transitions */
   html {
-    transition: background-color 0.5s ease;
+    transition:
+      background-color 0.5s ease,
+      color 0.5s ease;
   }
 
   /* Apply the default font to the body */
@@ -226,9 +233,10 @@
   .favorite-button,
   .heart-icon,
   .add-to-cart-button {
-    transition-property: background-color, color, border-color, opacity, transform;
+    transition-property:
+      background-color, color, border-color, opacity, transform, height, min-height, margin, padding;
     transition-duration: 0.5s;
-    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Lululemon theme */
@@ -264,6 +272,7 @@
     --product-image-padding: 0;
     --product-image-bg: 0 0% 98%;
     --product-image-hover-scale: 1; /* No zoom effect */
+    --product-image-object-fit: cover;
 
     /* Product content variables */
     --product-content-padding: 1rem 0 1rem 0;
@@ -317,7 +326,7 @@
     --badge-text-transform: capitalize;
 
     /* Grid variables */
-    --grid-gap: 2rem;
+    --grid-gap: 1.25rem;
     --grid-border: none;
   }
 
@@ -354,18 +363,22 @@
     --product-image-padding: 0;
     --product-image-bg: 0 0% 98%;
     --product-image-hover-scale: 1; /* No zoom effect */
+    --product-image-object-fit: cover;
 
     /* Product content variables */
-    --product-content-padding: 1rem 0;
+    --product-content-padding: 0 0;
     --product-content-text-align: center;
     --product-footer-padding: 0;
 
     /* Product title variables */
     --product-title-font-size: 0.875rem;
     --product-title-font-weight: 300;
-    --product-title-color:  hsl(0 0% 35.69%);
+    --product-title-color: 0 0% 35.69%;
     --product-title-margin: 0.25rem 0 0.75rem;
-
+    --product-title-overflow: hidden;
+    --product-title-text-overflow: ellipsis;
+    --product-title-white-space: nowrap;
+    --product-title-line-clamp: 1;
     /* Product price variables */
     --product-price-font-size: 0.875rem;
     --product-price-font-weight: 300;
@@ -404,14 +417,18 @@
     --badge-border: 1px solid hsl(0 0% 60.39%);
     --badge-position-top: auto;
     --badge-position-right: auto;
-    --badge-position-bottom: -0.5rem;
+    --badge-position-bottom: -0.75rem;
     --badge-position-left: 50%;
     --badge-transform: translateX(-50%);
     --badge-gap: 0.5rem;
 
-    /* Grid variables */
-    --grid-gap: 2rem;
+    /* Grid variables - updated grid gap to 2.5rem (40px) */
+    --grid-gap: 2.5rem;
     --grid-border: none;
+
+    /* Sale badge specific color for THAT theme */
+    --sale-badge-color: hsl(345.71 100% 32.94%);
+    --sale-badge-border-color: hsl(345.71 100% 32.94%);
   }
 
   /* Lego theme */
@@ -438,10 +455,11 @@
 
     /* Product card variables */
     --product-card-padding: 0;
-    --product-card-border: 1px solid hsl(0, 0%, 90%);
     --product-card-border-radius: 0;
     --product-card-shadow: none;
     --product-card-bg: 0 0% 100%;
+    /* Changed border to only top and left for Lego theme */
+    --product-card-border: 1px solid hsl(0, 0%, 90%);
 
     /* Product image variables */
     --product-image-aspect-ratio: 1 / 1;
@@ -449,6 +467,7 @@
     --product-image-bg: 0 0% 100%;
     --product-image-border: none;
     --product-image-scale: 0.8;
+    --product-image-object-fit: contain;
     --product-image-hover-scale: 1.05; /* Zoom effect for LEGO */
 
     /* Product content variables */
@@ -464,6 +483,7 @@
     --product-title-overflow: unset;
     --product-title-text-overflow: unset;
     --product-title-white-space: unset;
+    --product-title-line-clamp: 2;
 
     /* Product price variables */
     --product-price-font-size: 1rem;
@@ -528,10 +548,15 @@
   .product-card {
     font-family: var(--font-family-body);
     padding: var(--product-card-padding);
-    border: var(--product-card-border);
     border-radius: var(--product-card-border-radius);
     box-shadow: var(--product-card-shadow);
     background-color: hsl(var(--product-card-bg, var(--card)));
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Apply borders to all cards except Lego theme */
+  .product-card:not([data-theme="lego"]) {
+    border: var(--product-card-border);
   }
 
   .product-image-container {
@@ -548,7 +573,7 @@
   }
 
   .product-image {
-    object-fit: contain;
+    object-fit: var(--product-image-object-fit);
     transition: transform 0.3s ease;
     scale: var(--product-image-scale, 1);
   }
@@ -591,6 +616,42 @@
     fill: hsl(var(--heart-icon-color));
   }
 
+  /* THAT theme custom heart icon */
+  .that-heart-icon {
+    width: 28px;
+    height: 28px;
+    transition: all 0.2s ease;
+  }
+
+  .that-heart-icon.is-favorite .that-heart-svg path {
+    fill: black;
+  }
+
+  [data-theme="that"] .favorite-button:hover .that-heart-svg path {
+    fill: black;
+  }
+
+  /* Lululemon theme custom heart icon */
+  .lululemon-heart-icon {
+    width: 16px;
+    height: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .lululemon-heart-icon.is-favorite .lululemon-heart-svg {
+    color: black;
+    fill: black;
+  }
+
+  [data-theme="lululemon"] .favorite-button:hover .lululemon-heart-svg {
+    stroke: hsl(349.63deg 82.68% 45.29%);
+  }
+
+  [data-theme="lululemon"] .lululemon-heart-icon.is-favorite .lululemon-heart-svg {
+    color: hsl(349.63deg 82.68% 45.29%);
+    fill: hsl(349.63deg 82.68% 45.29%);
+  }
+
   .product-badges {
     position: absolute;
     top: var(--badge-position-top);
@@ -604,7 +665,7 @@
 
   /* LEGO specific badge styles */
   [data-theme="lego"] .product-badge {
-    font-size:0.625rem;
+    font-size: 0.625rem;
     border-left: 2px solid hsl(var(--badge-accent-color));
     border-right: none;
     border-top: none;
@@ -646,7 +707,12 @@
     margin: var(--product-title-margin);
     overflow: var(--product-title-overflow);
     text-overflow: var(--product-title-text-overflow);
-    white-space:var(--product-title-white-space);
+    white-space: var(--product-title-white-space);
+  }
+
+  [data-theme="lego"] .product-card:hover .product-title {
+    text-decoration: underline;
+    cursor: pointer;
   }
 
   .product-price {
@@ -654,6 +720,11 @@
     font-weight: var(--product-price-font-weight);
     color: hsl(var(--product-price-color));
     margin: var(--product-price-margin);
+  }
+
+  /* Add the specific style for THAT theme's discounted price */
+  .that-discounted-price {
+    color: hsl(0 100% 50%);
   }
 
   .product-footer {
@@ -682,9 +753,158 @@
   [data-theme="lego"] .product-card {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    border-top: 1px solid hsl(0, 0%, 90%);
+    border-left: 1px solid hsl(0, 0%, 90%);
+    border-right: none;
+    border-bottom: none;
   }
 
-  [data-theme="lego"] .product-content,
+  /* Basic border rules for all Lego cards */
+  [data-theme="lego"] .product-grid > div .product-card {
+    border-top: 1px solid hsl(0, 0%, 90%);
+    border-left: 1px solid hsl(0, 0%, 90%);
+    border-right: none;
+    border-bottom: none;
+  }
+
+  /* Add right border to items in the last column (4th item in each row) */
+  [data-theme="lego"] .product-grid > div:nth-child(4n) .product-card {
+    border-right: 1px solid hsl(0, 0%, 90%);
+  }
+
+  /* Add right border to the last item in any row (for incomplete rows) */
+  [data-theme="lego"] .product-grid > div:last-child .product-card {
+    border-right: 1px solid hsl(0, 0%, 90%);
+  }
+
+  /* Add bottom border to all items in the last row */
+  [data-theme="lego"] .product-grid > div:nth-last-child(-n + 4) .product-card {
+    border-bottom: 1px solid hsl(0, 0%, 90%);
+  }
+
+  /* Responsive adjustments for the border */
+  @media (max-width: 1024px) {
+    /* Reset right border for 4-column layout */
+    [data-theme="lego"] .product-grid > div:nth-child(4n) .product-card {
+      border-right: none;
+    }
+
+    /* Add right border for 3-column layout */
+    [data-theme="lego"] .product-grid > div:nth-child(3n) .product-card {
+      border-right: 1px solid hsl(0, 0%, 90%);
+    }
+
+    /* Reset bottom border for 4-column layout */
+    [data-theme="lego"] .product-grid > div:nth-last-child(-n + 4) .product-card {
+      border-bottom: none;
+    }
+
+    /* Add bottom border for 3-column layout */
+    [data-theme="lego"] .product-grid > div:nth-last-child(-n + 3) .product-card {
+      border-bottom: 1px solid hsl(0, 0%, 90%);
+    }
+
+    /* Ensure the last item in an incomplete row has a right border */
+    [data-theme="lego"] .product-grid > div:last-child .product-card {
+      border-right: 1px solid hsl(0, 0%, 90%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    /* Reset right border for 3-column layout */
+    [data-theme="lego"] .product-grid > div:nth-child(3n) .product-card {
+      border-right: none;
+    }
+
+    /* Add right border for 2-column layout */
+    [data-theme="lego"] .product-grid > div:nth-child(2n) .product-card {
+      border-right: 1px solid hsl(0, 0%, 90%);
+    }
+
+    /* Reset bottom border for 3-column layout */
+    [data-theme="lego"] .product-grid > div:nth-last-child(-n + 3) .product-card {
+      border-bottom: none;
+    }
+
+    /* Add bottom border for 2-column layout */
+    [data-theme="lego"] .product-grid > div:nth-last-child(-n + 2) .product-card {
+      border-bottom: 1px solid hsl(0, 0%, 90%);
+    }
+
+    /* Ensure the last item in an incomplete row has a right border */
+    [data-theme="lego"] .product-grid > div:last-child .product-card {
+      border-right: 1px solid hsl(0, 0%, 90%);
+    }
+  }
+
+  @media (max-width: 640px) {
+    /* Reset right border for 2-column layout */
+    [data-theme="lego"] .product-grid > div:nth-child(2n) .product-card {
+      border-right: none;
+    }
+
+    /* For single column layout, add right border to all items */
+    [data-theme="lego"] .product-grid > div .product-card {
+      border-right: 1px solid hsl(0, 0%, 90%);
+    }
+
+    /* Add bottom border to all items except the last one */
+    [data-theme="lego"] .product-grid > div:not(:last-child) .product-card {
+      border-bottom: 1px solid hsl(0, 0%, 90%);
+    }
+
+    /* Ensure the last item has a bottom border */
+    [data-theme="lego"] .product-grid > div:last-child .product-card {
+      border-bottom: 1px solid hsl(0, 0%, 90%);
+    }
+  }
+
+  [data-theme="lego"] .product-image-container {
+    flex-shrink: 0;
+  }
+
+  /* Replace the [data-theme="lego"] .product-title rule with this more flexible approach */
+  [data-theme="lego"] .product-title {
+    /* Remove the fixed min-height */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Add this new rule to make all product content areas in a row have the same height */
+  [data-theme="lego"] .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0;
+  }
+
+  /* Add this to ensure all cards in a row have the same content height */
+  [data-theme="lego"] .product-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  /* Modify the price container to push it to the bottom with consistent spacing */
+  [data-theme="lego"] .product-price-container {
+    margin-top: auto;
+  }
+
+  /* Add this to ensure all titles in the same row have the same height */
+  @media (min-width: 640px) {
+    [data-theme="lego"] .product-grid {
+      display: grid;
+      grid-auto-rows: 1fr;
+    }
+
+    [data-theme="lego"] .product-grid > div {
+      height: 100%;
+    }
+  }
+
   [data-theme="lego"] .product-footer {
     margin-top: auto;
   }
@@ -699,11 +919,6 @@
   [data-theme="lego"] .product-grid {
     border: var(--grid-border);
     gap: 0;
-    margin: 0;
-  }
-
-  [data-theme="lego"] .product-card {
-    border: var(--product-card-border);
     margin: 0;
   }
 
@@ -743,11 +958,78 @@
     color: var(--product-original-price-color);
     margin-left: 0.5rem;
   }
-  
+
   /* THAT theme specific brand name styles */
   [data-theme="that"] .product-brand {
     font-weight: 500;
     color: hsl(0, 0%, 0%);
     font-size: 0.875rem;
   }
+}
+
+.product-title {
+  transition:
+    height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    min-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s ease,
+    background-color 0.5s ease,
+    font-size 0.5s ease,
+    font-weight 0.5s ease,
+    margin 0.5s ease,
+    padding 0.5s ease;
+  will-change: height, min-height;
+}
+
+/* Add this to ensure smooth transitions for grid layout changes */
+.product-grid {
+  transition: gap 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Special class for theme transition state */
+
+/* Pre-allocate space for LEGO titles when transitioning */
+
+/* Add this new rule for THAT theme's product grid container */
+[data-theme="that"] .container {
+  max-width: 120rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Set max-width for THAT theme only */
+[data-theme="that"] .container {
+  max-width: 120rem !important;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 3.75rem;
+  padding-right: 3.75rem;
+}
+
+/* Ensure Lego theme maintains 4 columns */
+[data-theme="lego"] .product-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+@media (max-width: 1024px) {
+  [data-theme="lego"] .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-theme="lego"] .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  [data-theme="lego"] .product-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Add this new style for THAT theme's SALE badge */
+[data-theme="that"] .product-badge[data-badge-type="sale"] {
+  color: hsl(345.71 100% 32.94%);
+  border-color: hsl(345.71 100% 32.94%);
 }

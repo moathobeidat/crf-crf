@@ -1,4 +1,9 @@
-[[headers]]
-for = "/api/*"
-  [headers.values]
-  Cache-Control = "no-store, max-age=0, must-revalidate"
+[build]
+  command = "rm -rf .next node_modules/.cache && npm run build"
+  publish = "out"
+
+[build.processing]
+  skip_processing = true
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

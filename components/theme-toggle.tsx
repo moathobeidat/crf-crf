@@ -41,6 +41,9 @@ export function ThemeToggle() {
   if (!mounted) return null;
 
   const changeTheme = (newTheme: string) => {
+    // Add a class to indicate transition is happening
+    document.documentElement.classList.add("theme-transitioning");
+
     // Set the theme directly on the document
     document.documentElement.setAttribute("data-theme", newTheme);
 
@@ -50,14 +53,22 @@ export function ThemeToggle() {
     // Update our local state
     setCurrentTheme(newTheme);
 
-    // Dispatch a custom event for other components
-    window.dispatchEvent(
-      new CustomEvent("manual-theme-change", {
-        detail: { theme: newTheme, previousTheme: currentTheme },
-      })
-    );
+    // Dispatch a custom event for other components with a small delay
+    // to allow the initial CSS transitions to start
+    setTimeout(() => {
+      window.dispatchEvent(
+        new CustomEvent("manual-theme-change", {
+          detail: { theme: newTheme, previousTheme: currentTheme },
+        })
+      );
 
-    console.log(`Theme changed from ${currentTheme} to ${newTheme}`);
+      // Remove the transitioning class after the transition completes
+      setTimeout(() => {
+        document.documentElement.classList.remove("theme-transitioning");
+      }, 500);
+
+      console.log(`Theme changed from ${currentTheme} to ${newTheme}`);
+    }, 50);
   };
 
   return (
