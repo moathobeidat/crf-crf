@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ $.Release.Name }}-vault
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: {{ $.Release.Name }}
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: "{{ index .Values "common-app" "serviceAccount" "name" }}"
+  namespace: {{ $.Release.Namespace }}

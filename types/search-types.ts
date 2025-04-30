@@ -82,7 +82,7 @@ export interface Offer {
 
 export interface Stock {
   stockLevelStatus: string;
-  value: number;
+  value?: number;
 }
 
 export interface Unit {
@@ -114,6 +114,8 @@ export interface Product {
   unit: Unit;
   links: Links;
   promoBadges: PromoBadge[];
+  isMarketPlace?: boolean;
+  isFBC?: boolean;
 }
 
 export interface FacetValue {
@@ -122,6 +124,7 @@ export interface FacetValue {
   name: string;
   selected: boolean;
   url?: string;
+  count?: number;
 }
 
 export interface Facet {
@@ -161,4 +164,17 @@ export interface SearchResponse {
   filters: Filter[];
   pagination: Pagination;
   sorts: SortOption[];
+  meta?: {
+    statusCode: number;
+    message: string;
+  };
+  data?: {
+    products: Product[];
+    facets: Facet[];
+    filters: Filter[];
+    pagination: Pagination;
+    sorts: SortOption[];
+    totalProducts?: number;
+    numOfPages?: number;
+  };
 }

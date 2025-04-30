@@ -1,13 +1,15 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ProductCarousel } from "@/components/product-carousel"
-import type { ProductCardProps } from "@/components/product-card"
-import { toast } from "@/components/ui/use-toast"
+import { useState } from "react";
+import { ProductCarousel } from "@/components/product-carousel";
+import type { ProductCardProps } from "@/components/product-card";
+import { toast } from "@/components/ui/use-toast";
 
 export default function ProductCarouselPage() {
   // Sample products data
-  const [products, setProducts] = useState<Omit<ProductCardProps, "onToggleFavorite" | "onAddToCart">[]>([
+  const [products, setProducts] = useState<
+    Omit<ProductCardProps, "onToggleFavorite" | "onAddToCart">[]
+  >([
     {
       id: "1",
       title: "LEGO® Oracle Red Bull Racing RB20 F1 Car",
@@ -86,33 +88,35 @@ export default function ProductCarouselPage() {
       badges: [{ text: "LAST ITEMS", variant: "default" }],
       isFavorite: false,
     },
-  ])
+  ]);
 
   // Toggle favorite handler
   const handleToggleFavorite = (id: string) => {
     setProducts(
-      products.map((product) => (product.id === id ? { ...product, isFavorite: !product.isFavorite } : product)),
-    )
+      products.map((product) =>
+        product.id === id ? { ...product, isFavorite: !product.isFavorite } : product
+      )
+    );
 
-    const product = products.find((p) => p.id === id)
+    const product = products.find((p) => p.id === id);
     if (product) {
       toast({
         title: product.isFavorite ? "Removed from favorites" : "Added to favorites",
         description: product.title,
-      })
+      });
     }
-  }
+  };
 
   // Add to cart handler
   const handleAddToCart = (id: string) => {
-    const product = products.find((p) => p.id === id)
+    const product = products.find((p) => p.id === id);
     if (product) {
       toast({
         title: "Added to bag",
         description: product.title,
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="container mx-auto py-10">
@@ -124,5 +128,5 @@ export default function ProductCarouselPage() {
         className="mx-auto"
       />
     </div>
-  )
+  );
 }

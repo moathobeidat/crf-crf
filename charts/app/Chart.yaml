@@ -1,0 +1,7 @@
+apiVersion: v2
+name: crf-demo1
+version: 1.0.0
+dependencies:
+  - name: common-app
+    version: 0.2.3
+    repository: http://chartmuseum.cicd.grid2.maf.ae/grid/modified

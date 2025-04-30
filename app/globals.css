@@ -2,8 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Define font faces directly in CSS */
+
+@font-face {
+  font-family: "Calibre";
+  src: url("/fonts/calibre/Calibre-Light.1d7ff27321d44845.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("/fonts/calibre/Calibre-Regular.a32fb14f8b1e9b7f.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("/fonts/calibre/Calibre-Medium.902350562bcf8bfa.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("/fonts/calibre/Calibre-Semibold.37b462ff8ad0611a.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("/fonts/calibre/Calibre-Bold.1367848524d7c1ce.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cera Pro";
+  src: url("/fonts/cera-pro/CeraPro-Regular.72295c32fe019b59.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cera Pro";
+  src: url("/fonts/cera-pro/CeraPro-Medium.d3a3a44277935e15.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cera Pro";
+  src: url("/fonts/cera-pro/CeraPro-Bold.e22a282f67a05164.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "aktiv";
+  src: url("/fonts/aktiv/ec04e76a02f7f67c-s.p.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "aktiv";
+  src: url("/fonts/aktiv/5f4e24baa451d206-s.p.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "aktiv";
+  src: url("/fonts/aktiv/276dfa442ee1e91f-s.p.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
+  /* Base theme variables */
   :root {
+    /* Colors */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -33,44 +125,629 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    /* Grid variables */
+    --grid-gap: 2rem;
+    --grid-border: none;
+
+    /* Product card variables */
+    --product-card-padding: 0;
+    --product-card-border: none;
+    --product-card-border-radius: 0;
+    --product-card-shadow: none;
+    --product-card-bg: var(--card);
+
+    /* Product image variables */
+    --product-image-aspect-ratio: 1 / 1;
+    --product-image-padding: 0;
+    --product-image-bg: 0 0% 98%;
+    --product-image-border: none;
+    --product-image-hover-scale: 1;
+
+    /* Product content variables */
+    --product-content-padding: 1rem;
+    --product-content-text-align: left;
+    --product-footer-padding: 1rem;
+
+    /* Product title variables */
+    --product-title-font-size: 1rem;
+    --product-title-font-weight: 500;
+    --product-title-color: var(--foreground);
+    --product-title-margin: 0.25rem 0 0.5rem;
+    --product-title-overflow: unset;
+    --product-title-text-overflow: unset;
+    --product-title-white-space: unset;
+
+    /* Product price variables */
+    --product-price-font-size: 1rem;
+    --product-price-font-weight: 500;
+    --product-price-color: var(--foreground);
+    
+    --product-original-price-text-size: 1.1875rem;
+    --product-original-price-text-decoration: line-through;
+    --product-original-price-padding: 0;
+    --product-original-price-color: hsl(0deg 0% 58.43%);
+
+
+    /* Favorite button variables */
+    --favorite-button-bg: transparent;
+    --favorite-button-size: 2.5rem;
+    --favorite-button-position-top: 0.5rem;
+    --favorite-button-position-right: 0.5rem;
+    --favorite-button-position-left: auto;
+    --favorite-button-opacity: 1;
+    --favorite-button-border-radius: 50%;
+    --heart-icon-color: 0 0% 0%;
+    --heart-icon-size: 1.5rem;
+
+    /* Add to cart button variables */
+    --add-to-cart-button-bg: 0 0% 0%;
+    --add-to-cart-button-color: 0 0% 100%;
+    --add-to-cart-button-hover: 0 0% 20%;
+    --add-to-cart-button-height: 2.75rem;
+    --add-to-cart-button-radius: 0;
+    --add-to-cart-button-font-size: 0.875rem;
+    --add-to-cart-button-font-weight: 500;
+
+    /* Badge variables */
+    --badge-gap: 0.5rem;
+    --badge-bg: 0 0% 100%;
+    --badge-color: 0 0% 0%;
+    --badge-font-size: 0.75rem;
+    --badge-font-weight: 600;
+    --badge-padding: 0.25rem 0.5rem;
+    --badge-border-radius: 0.25rem;
+    --badge-border: none;
+    --badge-position-top: 0.5rem;
+    --badge-position-right: 0.5rem;
+    --badge-position-bottom: auto;
+    --badge-position-left: auto;
+    --badge-text-transform: uppercase;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  /* Add smooth theme transitions */
+  html {
+    transition: background-color 0.5s ease;
+  }
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+  /* Apply the default font to the body */
+  body {
+    font-family: var(--font-family-body);
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  /* Apply transitions to specific properties instead of all */
+  .product-card,
+  .product-content,
+  .product-title,
+  .product-price,
+  .product-image-wrapper,
+  .product-badges,
+  .product-badge,
+  .favorite-button,
+  .heart-icon,
+  .add-to-cart-button {
+    transition-property: background-color, color, border-color, opacity, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+  /* Lululemon theme */
+  [data-theme="lululemon"] {
+    /* Font Family */
+    --font-family-title: "Calibre", Arial, sans-serif;
+    --font-family-body: "Calibre", Arial, sans-serif;
+    --font-family-button: "Calibre", Arial, sans-serif;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --primary: 348 83% 47%;
+    --primary-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 0 0% 90%;
+
+    /* Product card variables */
+    --product-card-padding: 0;
+    --product-card-border: none;
+    --product-card-border-radius: 0;
+    --product-card-shadow: none;
+
+    /* Product image variables */
+    --product-image-aspect-ratio: 4 / 5;
+    --product-image-padding: 0;
+    --product-image-bg: 0 0% 98%;
+    --product-image-hover-scale: 1; /* No zoom effect */
+
+    /* Product content variables */
+    --product-content-padding: 1rem 0 1rem 0;
+    --product-content-text-align: left;
+    --product-footer-padding: 0;
+
+    /* Product title variables */
+    --product-title-font-size: 1.25rem;
+    --product-title-font-weight: 500;
+    --product-title-color: 0 0% 0%;
+    --product-title-margin: 0.25rem 0 0 0;
+
+    /* Product price variables */
+    --product-price-font-size: 1.1875rem;
+    --product-price-font-weight: 400;
+    --product-price-color: 0 0% 0%;
+
+    /* Favorite button variables */
+    --favorite-button-bg: transparent;
+    --favorite-button-size: 2.5rem;
+    --favorite-button-position-top: 0.5rem;
+    --favorite-button-position-right: 0.5rem;
+    --favorite-button-position-left: auto;
+    --favorite-button-opacity: 1;
+    --favorite-button-border-radius: 50%;
+    --heart-icon-color: 0 0% 0%;
+    --heart-icon-size: 1.5rem;
+
+    /* Add to cart button variables */
+    --add-to-cart-button-bg: 0 0% 0%;
+    --add-to-cart-button-color: 0 0% 100%;
+    --add-to-cart-button-hover: 0 0% 20%;
+    --add-to-cart-button-height: 2.75rem;
+    --add-to-cart-button-radius: 0;
+    --add-to-cart-button-font-size: 0.875rem;
+    --add-to-cart-button-font-weight: 500;
+
+    /* Badge variables */
+    --badge-gap: 0;
+    --badge-bg: 0 0% 100%;
+    --badge-color: 0 0% 0%;
+    --badge-font-size: 0.75rem;
+    --badge-font-weight: 700;
+    --badge-padding: 0.25rem 0.375rem;
+    --badge-border-radius: 0.25rem;
+    --badge-border: 1px solid hsl(0, 0%, 84%);
+    --badge-position-top: auto;
+    --badge-position-right: auto;
+    --badge-position-bottom: 0.625rem;
+    --badge-position-left: 0.625rem;
+    --badge-text-transform: capitalize;
+
+    /* Grid variables */
+    --grid-gap: 2rem;
+    --grid-border: none;
+  }
+
+  /* THAT theme */
+  [data-theme="that"] {
+    /* Font Family */
+    --font-family-title: "aktiv", Arial, sans-serif;
+    --font-family-body: "aktiv", Arial, sans-serif;
+    --font-family-button: "aktiv", Arial, sans-serif;
+
+    /* Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --primary: 0 0% 20%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --border: 0 0% 90%;
+
+    /* Product card variables */
+    --product-card-padding: 0;
+    --product-card-border: none;
+    --product-card-border-radius: 0;
+    --product-card-shadow: none;
+
+    /* Product image variables */
+    --product-image-aspect-ratio: 4 / 5;
+    --product-image-padding: 0;
+    --product-image-bg: 0 0% 98%;
+    --product-image-hover-scale: 1; /* No zoom effect */
+
+    /* Product content variables */
+    --product-content-padding: 1rem 0;
+    --product-content-text-align: center;
+    --product-footer-padding: 0;
+
+    /* Product title variables */
+    --product-title-font-size: 0.875rem;
+    --product-title-font-weight: 300;
+    --product-title-color:  hsl(0 0% 35.69%);
+    --product-title-margin: 0.25rem 0 0.75rem;
+
+    /* Product price variables */
+    --product-price-font-size: 0.875rem;
+    --product-price-font-weight: 300;
+    --product-price-color: 0 0% 0%;
+
+    --product-original-price-text-size: 0.75rem;
+    --product-original-price-color: hsl(0, 0%, 0%);
+
+    /* Favorite button variables */
+    --favorite-button-bg: transparent;
+    --favorite-button-size: 2.5rem;
+    --favorite-button-position-top: 0.5rem;
+    --favorite-button-position-right: 0.5rem;
+    --favorite-button-position-left: auto;
+    --favorite-button-opacity: 0;
+    --favorite-button-border-radius: 50%;
+    --heart-icon-color: 0 0% 20%;
+    --heart-icon-size: 1.25rem;
+
+    /* Add to cart button variables */
+    --add-to-cart-button-bg: 0 0% 0%;
+    --add-to-cart-button-color: 0 0% 100%;
+    --add-to-cart-button-hover: 0 0% 20%;
+    --add-to-cart-button-height: 2.75rem;
+    --add-to-cart-button-radius: 0;
+    --add-to-cart-button-font-size: 0.875rem;
+    --add-to-cart-button-font-weight: 500;
+
+    /* Badge variables - update these properties */
+    --badge-bg: 0 0% 100%;
+    --badge-color: hsl(204.62 79.59% 9.61%);
+    --badge-font-size: 0.625rem;
+    --badge-font-weight: 400;
+    --badge-padding: 0.375rem 0.5rem;
+    --badge-border-radius: 0;
+    --badge-border: 1px solid hsl(0 0% 60.39%);
+    --badge-position-top: auto;
+    --badge-position-right: auto;
+    --badge-position-bottom: -0.5rem;
+    --badge-position-left: 50%;
+    --badge-transform: translateX(-50%);
+    --badge-gap: 0.5rem;
+
+    /* Grid variables */
+    --grid-gap: 2rem;
+    --grid-border: none;
+  }
+
+  /* Lego theme */
+  [data-theme="lego"] {
+    /* Font Family */
+    --font-family-title: "Cera Pro", Arial, sans-serif;
+    --font-family-body: "Cera Pro", Arial, sans-serif;
+    --font-family-button: "Cera Pro", Arial, sans-serif;
+
+    /* Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 0 0% 0%;
+
+    --border: 0 0% 90%;
+
+    /* Product card variables */
+    --product-card-padding: 0;
+    --product-card-border: 1px solid hsl(0, 0%, 90%);
+    --product-card-border-radius: 0;
+    --product-card-shadow: none;
+    --product-card-bg: 0 0% 100%;
+
+    /* Product image variables */
+    --product-image-aspect-ratio: 1 / 1;
+    --product-image-padding: 1rem;
+    --product-image-bg: 0 0% 100%;
+    --product-image-border: none;
+    --product-image-scale: 0.8;
+    --product-image-hover-scale: 1.05; /* Zoom effect for LEGO */
+
+    /* Product content variables */
+    --product-content-padding: 0.875rem;
+    --product-content-text-align: left;
+    --product-footer-padding: 0.875rem;
+
+    /* Product title variables */
+    --product-title-font-size: 0.875rem;
+    --product-title-font-weight: 500;
+    --product-title-color: 0 0% 0%;
+    --product-title-margin: 0.25rem 0 0;
+    --product-title-overflow: unset;
+    --product-title-text-overflow: unset;
+    --product-title-white-space: unset;
+
+    /* Product price variables */
+    --product-price-font-size: 1rem;
+    --product-price-font-weight: 600;
+    --product-price-color: 0 0% 0%;
+
+    /* Favorite button variables */
+    --favorite-button-bg: 0 0% 97.25%;
+    --favorite-button-size: 1.875rem;
+    --favorite-button-position-top: 0.875rem;
+    --favorite-button-position-left: 0.875rem;
+    --favorite-button-position-right: auto;
+    --favorite-button-opacity: 1;
+    --favorite-button-border-radius: 50%;
+    --heart-icon-color: 213 60% 42%;
+    --heart-icon-size: 0.875rem;
+
+    /* Add to cart button variables */
+    --add-to-cart-button-bg: 24 100% 56%;
+    --add-to-cart-button-color: 0 0% 0%;
+    --add-to-cart-button-hover: 24 100% 50%;
+    --add-to-cart-button-height: 3rem;
+    --add-to-cart-button-radius: 24px;
+    --add-to-cart-button-font-size: 1rem;
+    --add-to-cart-button-font-weight: 600;
+    --add-to-cart-button-padding: 0.688rem 1.438rem;
+
+    /* Badge variables */
+    --badge-bg: 0 0% 100%;
+    --badge-color: 0 0% 0%;
+    --badge-font-size: 0.75rem;
+    --badge-font-weight: 700;
+    --badge-padding: 0.25rem 0.75rem;
+    --badge-border-radius: 0;
+    --badge-border: 1px solid hsl(45, 100%, 50%);
+    --badge-position-top: 0.938rem;
+    --badge-position-right: 0.938rem;
+    --badge-position-bottom: auto;
+    --badge-position-left: auto;
+    --badge-text-transform: capitalize;
+    --badge-gap: 0.313rem;
+    /* Grid variables - set gap to 0 for no spaces between cards */
+    --grid-gap: 0;
+    --grid-border: none;
+
+    /* LEGO specific badge accent color */
+    --badge-accent-color: 43 81% 65%;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+/* Product Card Component Styles */
+@layer components {
+  /* Theme toggle button styles */
+  .theme-toggle-button {
+    transition: all 0.3s ease;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .theme-toggle-button[data-active="true"] {
+    font-weight: 600;
+  }
+
+  .product-card {
+    font-family: var(--font-family-body);
+    padding: var(--product-card-padding);
+    border: var(--product-card-border);
+    border-radius: var(--product-card-border-radius);
+    box-shadow: var(--product-card-shadow);
+    background-color: hsl(var(--product-card-bg, var(--card)));
+  }
+
+  .product-image-container {
+    position: relative;
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    aspect-ratio: var(--product-image-aspect-ratio);
+    width: 100%;
+    background-color: hsl(var(--product-image-bg));
+    padding: var(--product-image-padding);
+    border: var(--product-image-border);
+  }
+
+  .product-image {
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    scale: var(--product-image-scale, 1);
+  }
+
+  /* Apply hover scale based on theme variable */
+  .product-card:hover .product-image {
+    transform: scale(var(--product-image-hover-scale, 1));
+  }
+
+  .favorite-button {
+    position: absolute;
+    top: var(--favorite-button-position-top);
+    left: var(--favorite-button-position-left);
+    right: var(--favorite-button-position-right);
+    width: var(--favorite-button-size);
+    height: var(--favorite-button-size);
+    border-radius: var(--favorite-button-border-radius);
+    background-color: hsl(var(--favorite-button-bg));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: var(--favorite-button-opacity);
+    transition: opacity 0.2s ease;
+  }
+
+  /* Show favorite button on hover for THAT theme */
+  [data-theme="that"] .product-card:hover .favorite-button {
+    opacity: 1;
+  }
+
+  .heart-icon {
+    width: var(--heart-icon-size);
+    height: var(--heart-icon-size);
+    color: hsl(var(--heart-icon-color));
+    transition: all 0.2s ease;
+  }
+
+  .heart-icon.is-favorite {
+    fill: hsl(var(--heart-icon-color));
+  }
+
+  .product-badges {
+    position: absolute;
+    top: var(--badge-position-top);
+    right: var(--badge-position-right);
+    bottom: var(--badge-position-bottom);
+    left: var(--badge-position-left);
+    display: flex;
+    gap: var(--badge-gap);
+    transform: var(--badge-transform, none);
+  }
+
+  /* LEGO specific badge styles */
+  [data-theme="lego"] .product-badge {
+    font-size:0.625rem;
+    border-left: 2px solid hsl(var(--badge-accent-color));
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    padding: 0.188rem 0.5rem;
+    background-color: hsl(0, 0%, 95%);
+  }
+
+  [data-theme="that"] .product-badge {
+    line-height: 0.75rem;
+  }
+
+  .product-badge {
+    background-color: hsl(var(--badge-bg));
+    color: hsl(var(--badge-color));
+    font-size: var(--badge-font-size);
+    font-weight: var(--badge-font-weight);
+    padding: var(--badge-padding);
+    border-radius: var(--badge-border-radius);
+    border: var(--badge-border);
+    text-transform: var(--badge-text-transform);
+  }
+
+  .product-content {
+    padding: var(--product-content-padding);
+    text-align: var(--product-content-text-align);
+  }
+
+  /* Lululemon specific content styles */
+  [data-theme="lululemon"] .product-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .product-title {
+    font-size: var(--product-title-font-size);
+    font-weight: var(--product-title-font-weight);
+    color: hsl(var(--product-title-color));
+    margin: var(--product-title-margin);
+    overflow: var(--product-title-overflow);
+    text-overflow: var(--product-title-text-overflow);
+    white-space:var(--product-title-white-space);
+  }
+
+  .product-price {
+    font-size: var(--product-price-font-size);
+    font-weight: var(--product-price-font-weight);
+    color: hsl(var(--product-price-color));
+    margin: var(--product-price-margin);
+  }
+
+  .product-footer {
+    padding: var(--product-footer-padding);
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .add-to-cart-button {
+    background-color: hsl(var(--add-to-cart-button-bg));
+    color: hsl(var(--add-to-cart-button-color));
+    font-size: var(--add-to-cart-button-font-size);
+    font-weight: var(--add-to-cart-button-font-weight);
+    border-radius: var(--add-to-cart-button-radius);
+    padding: var(--add-to-cart-button-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .add-to-cart-button:hover {
+    background-color: hsl(var(--add-to-cart-button-hover));
+  }
+
+  /* Lego specific overrides */
+  [data-theme="lego"] .product-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  [data-theme="lego"] .product-content,
+  [data-theme="lego"] .product-footer {
+    margin-top: auto;
+  }
+
+  /* Product Grid Styles */
+  .product-grid {
+    gap: var(--grid-gap);
+    border: var(--grid-border);
+  }
+
+  /* LEGO specific grid styles */
+  [data-theme="lego"] .product-grid {
+    border: var(--grid-border);
+    gap: 0;
+    margin: 0;
+  }
+
+  [data-theme="lego"] .product-card {
+    border: var(--product-card-border);
+    margin: 0;
+  }
+
+  /* Add a specific style for THAT theme badges to make them stack vertically */
+  [data-theme="that"] .product-badges {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  /* Add brand name styles */
+  .product-brand {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 0.25rem;
+  }
+
+  /* Add price container for displaying original and discounted prices */
+  .product-price-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  /* Theme-specific price container alignment */
+  [data-theme="that"] .product-price-container {
+    justify-content: center;
+  }
+
+  [data-theme="lululemon"] .product-price-container {
+    justify-content: flex-start;
+  }
+
+  .product-original-price {
+    font-size: var(--product-original-price-text-size);
+    text-decoration: var(--product-original-price-text-decoration);
+    color: var(--product-original-price-color);
+    margin-left: 0.5rem;
+  }
+  
+  /* THAT theme specific brand name styles */
+  [data-theme="that"] .product-brand {
+    font-weight: 500;
+    color: hsl(0, 0%, 0%);
+    font-size: 0.875rem;
   }
 }

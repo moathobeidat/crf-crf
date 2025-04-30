@@ -1,11 +1,10 @@
+"use client";
+
 // lib/hooks/use-product.ts
 
 import { useState, useCallback } from "react";
-import {
-  getProductById,
-  getProductDetails,
-} from "@/lib/services/product-service";
-import { ProductDetail, ProductResponse } from "@/types/product-types";
+import { getProductById, getProductDetails } from "@/lib/services/product-service";
+import type { ProductDetail } from "@/types/product-types";
 
 export function useProduct() {
   const [product, setProduct] = useState<ProductDetail | null>(null);
@@ -23,9 +22,7 @@ export function useProduct() {
       setProduct(productData);
       return productData;
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("Unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error("Unknown error occurred"));
       return null;
     } finally {
       setIsLoading(false);
@@ -43,9 +40,7 @@ export function useProduct() {
       setProducts(response.products);
       return response.products;
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("Unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error("Unknown error occurred"));
       return [];
     } finally {
       setIsLoading(false);

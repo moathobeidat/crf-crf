@@ -5,6 +5,7 @@ A modern e-commerce web application built with Next.js featuring a responsive UI
 ## Overview
 
 This project demonstrates a product showcase application with features like:
+
 - Product cards with favorite functionality
 - Product carousels for browsing collections
 - Responsive sidebar navigation
@@ -30,12 +31,14 @@ This project demonstrates a product showcase application with features like:
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd mafui-demo1
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -43,6 +46,7 @@ This project demonstrates a product showcase application with features like:
    ```
 
 3. Run the development server:
+
    ```bash
    npm run dev
    # or
@@ -97,6 +101,7 @@ This project follows the [Conventional Commits](https://www.conventionalcommits.
 ```
 
 Common types:
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation changes
@@ -106,6 +111,7 @@ Common types:
 - `chore`: Changes to build process or auxiliary tools
 
 Examples:
+
 ```
 feat: add product search functionality
 fix(auth): resolve login redirect issue

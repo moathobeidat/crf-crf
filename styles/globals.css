@@ -48,6 +48,7 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -81,6 +82,23 @@ body {
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  [data-theme="lululemon"] body {
+    --primary: #e03c31;
+    background-color: cornflowerblue;
+  }
+
+  [data-theme="that"] body {
+    --primary: gold;
+    background-color: lightslategray;
+  }
+
+  [data-theme="lego"] body {
+    --primary: hsl(25, 95%, 53%);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    background-color: rgb(191, 18, 24);
   }
 }
 

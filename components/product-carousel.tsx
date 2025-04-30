@@ -1,62 +1,71 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useCallback } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Carousel as CarouselPrimitive, CarouselContent, CarouselItem } from "@/components/ui/carousel"
-import { ProductCard, type ProductCardProps } from "@/components/product-card"
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Carousel as CarouselPrimitive,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { ProductCard, type ProductCardProps } from "@/components/product-card";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface ProductCarouselProps {
-  products: Omit<ProductCardProps, "onToggleFavorite" | "onAddToCart">[]
-  onToggleFavorite?: (id: string) => void
-  onAddToCart?: (id: string) => void
-  className?: string
+  products: Omit<ProductCardProps, "onToggleFavorite" | "onAddToCart">[];
+  onToggleFavorite?: (id: string) => void;
+  onAddToCart?: (id: string) => void;
+  className?: string;
 }
 
-export function ProductCarousel({ products, onToggleFavorite, onAddToCart, className }: ProductCarouselProps) {
+export function ProductCarousel({
+  products,
+  onToggleFavorite,
+  onAddToCart,
+  className,
+}: ProductCarouselProps) {
   // Check if we're on desktop (large screen)
-  const isDesktop = useMediaQuery("(min-width: 1024px)")
-  const [api, setApi] = useState<any>(null)
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(true)
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const [api, setApi] = useState<any>(null);
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
 
   // Set carousel options based on screen size
-  const [slidesToScroll, setSlidesToScroll] = useState(1)
+  const [slidesToScroll, setSlidesToScroll] = useState(1);
 
   useEffect(() => {
-    setSlidesToScroll(isDesktop ? 4 : 1)
-  }, [isDesktop])
+    setSlidesToScroll(isDesktop ? 4 : 1);
+  }, [isDesktop]);
 
   const onSelect = useCallback(() => {
-    if (!api) return
-    setPrevBtnEnabled(api.canScrollPrev())
-    setNextBtnEnabled(api.canScrollNext())
-  }, [api])
+    if (!api) return;
+    setPrevBtnEnabled(api.canScrollPrev());
+    setNextBtnEnabled(api.canScrollNext());
+  }, [api]);
 
   useEffect(() => {
-    if (!api) return
+    if (!api) return;
 
-    api.on("select", onSelect)
-    api.on("reInit", onSelect)
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
 
     // Initial check
-    onSelect()
+    onSelect();
 
     return () => {
-      api.off("select", onSelect)
-      api.off("reInit", onSelect)
-    }
-  }, [api, onSelect])
+      api.off("select", onSelect);
+      api.off("reInit", onSelect);
+    };
+  }, [api, onSelect]);
 
   const scrollPrev = useCallback(() => {
-    if (api) api.scrollPrev(slidesToScroll)
-  }, [api, slidesToScroll])
+    if (api) api.scrollPrev(slidesToScroll);
+  }, [api, slidesToScroll]);
 
   const scrollNext = useCallback(() => {
-    if (api) api.scrollNext(slidesToScroll)
-  }, [api, slidesToScroll])
+    if (api) api.scrollNext(slidesToScroll);
+  }, [api, slidesToScroll]);
 
   return (
     <div className="relative w-full">
@@ -72,7 +81,11 @@ export function ProductCarousel({ products, onToggleFavorite, onAddToCart, class
           {products.map((product) => (
             <CarouselItem key={product.id} className="pl-8 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
               <div>
-                <ProductCard {...product} onToggleFavorite={onToggleFavorite} onAddToCart={onAddToCart} />
+                <ProductCard
+                  {...product}
+                  onToggleFavorite={onToggleFavorite}
+                  onAddToCart={onAddToCart}
+                />
               </div>
             </CarouselItem>
           ))}
@@ -104,5 +117,5 @@ export function ProductCarousel({ products, onToggleFavorite, onAddToCart, class
         )}
       </CarouselPrimitive>
     </div>
-  )
+  );
 }

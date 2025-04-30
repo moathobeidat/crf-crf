@@ -1,4 +1,4 @@
-import { ProductCardDemo } from "@/components/product-card-demo"
+import { ProductCardDemo } from "@/components/product-card-demo";
 
 export default function ProductCardPage() {
   return (
@@ -6,5 +6,5 @@ export default function ProductCardPage() {
       <h1 className="text-3xl font-bold mb-8">Product Card</h1>
       <ProductCardDemo />
     </div>
-  )
+  );
 }

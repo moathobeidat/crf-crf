@@ -1,12 +1,10 @@
 // lib/services/product-service.ts
 
-import { ProductRequestBody, ProductResponse } from "@/types/product-types";
+import type { ProductRequestBody, ProductResponse } from "@/types/product-types";
 
 const API_BASE_URL = "/api/product";
 
-export async function getProductDetails(
-  productIds: string[]
-): Promise<ProductResponse> {
+export async function getProductDetails(productIds: string[]): Promise<ProductResponse> {
   const requestBody: ProductRequestBody = {
     id: productIds,
     includeVariants: true,
@@ -32,8 +30,6 @@ export async function getProductDetails(
   return response.json();
 }
 
-export async function getProductById(
-  productId: string
-): Promise<ProductResponse> {
+export async function getProductById(productId: string): Promise<ProductResponse> {
   return getProductDetails([productId]);
 }
