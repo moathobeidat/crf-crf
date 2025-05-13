@@ -92,6 +92,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "effra";
+  src: url("/fonts/effra/Effra_W_Rg.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "effra";
+  src: url("/fonts/effra/Effra_W_Bd.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   /* Base theme variables */
   :root {
@@ -532,6 +548,116 @@
     /* LEGO specific badge accent color */
     --badge-accent-color: 43 81% 65%;
   }
+
+  /* Add this after the [data-theme="lego"] section in the @layer base section */
+
+  /* Updated VOX theme based on the new design */
+  [data-theme="vox"] {
+    /* Font Family */
+    --font-family-title: "effra", Arial, sans-serif;
+    --font-family-body: "Poppins", Arial, sans-serif;
+    --font-family-button: "Poppins", Arial, sans-serif;
+
+    /* Colors */
+    --background: 240 25% 5%;
+    --foreground: 0 0% 100%;
+
+    --card: 240 25% 5%;
+    --card-foreground: 0 0% 100%;
+
+    --primary: 328 73% 41%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --border: 0 0% 20%;
+
+    /* Product card variables */
+    --product-card-padding: 0;
+    --product-card-border: none;
+    --product-card-border-radius: 1rem;
+    --product-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --product-card-bg: 240 25% 5%;
+
+    /* Product image variables */
+    --product-image-aspect-ratio: 2 / 3;
+    --product-image-padding: 0;
+    --product-image-bg: 0 0% 0%;
+    --product-image-hover-scale: 1;
+    --product-image-object-fit: cover;
+    --product-image-border-radius: 1rem;
+
+    /* Product content variables */
+    --product-content-padding: 1rem 0 1rem 0;
+    --product-content-text-align: left;
+    --product-content-bg: 240 25% 5%;
+    --product-footer-padding: 0;
+
+    /* Product title variables */
+    --product-title-font-size: 1.5rem;
+    --product-title-font-weight: var(--font-weight-regular);
+    --product-title-font-family: "effra", Arial, sans-serif; /* static until fixed form Figma */
+    --product-title-color: 0 0% 100%;
+    --product-title-margin: 1.5rem 0 1rem 0;
+    --product-title-overflow: hidden;
+    --product-title-text-overflow: ellipsis;
+    --product-title-white-space: nowrap;
+    --product-title-line-clamp: 1;
+
+    /* VOX specific variables */
+    --vox-age-badge-bg: 240 100% 4.31% / 30%;
+    --vox-age-badge-color: 0 0% 100%;
+    --vox-age-badge-font-size: 1rem;
+    --vox-age-badge-font-weight: 400;
+    --vox-age-badge-padding: 0.25rem 0.5rem;
+    --vox-age-badge-border-radius: 0.5rem;
+    --vox-age-badge-position-top: 0.5rem;
+    --vox-age-badge-position-left: 0.5rem;
+
+    --vox-advance-badge-bg: 38.24 100% 60%;
+    --vox-advance-badge-color: 0 0% 0%;
+    --vox-advance-badge-font-size: var(--font-size-lg);
+    --vox-advance-badge-font-weight: 600;
+    --vox-advance-badge-padding: 0.25rem 1.5rem;
+    --vox-advance-badge-border-radius: 0.5rem 0.5rem 0 0;
+    --vox-advance-badge-position-bottom: 0;
+    --vox-advance-badge-position-left: 50%;
+    --vox-advance-badge-transform: translateX(-50%);
+    --vox-advance-badge-width: calc(100% - 110px);
+    --vox-advance-badge-text-align: center;
+
+    --vox-rating-badge-bg: 236.67deg 9.68% 36.47%;
+    --vox-rating-badge-color: 0 0% 100%;
+    --vox-rating-badge-font-size: var(--font-size-md);
+    --vox-rating-badge-font-weight: 600;
+    --vox-rating-badge-padding: 0.25rem 0.5rem;
+    --vox-rating-badge-border-radius: 0.25rem;
+    --vox-rating-badge-margin: 0 0.5rem 0 0;
+
+    --vox-category-badge-bg: 0 0% 20%;
+    --vox-category-badge-color: 0 0% 100%;
+    --vox-category-badge-font-size: 1.25rem;
+    --vox-category-badge-font-weight: 700;
+    --vox-category-badge-padding: 0.5rem 1rem;
+    --vox-category-badge-border-radius: 0.5rem;
+
+    /* Favorite button variables */
+    --favorite-button-bg: transparent;
+    --favorite-button-size: 3rem;
+    --favorite-button-position-top: 0.25rem;
+    --favorite-button-position-right: 0.25rem;
+    --favorite-button-position-left: auto;
+    --favorite-button-opacity: 1;
+    --favorite-button-border-radius: 50%;
+    --heart-icon-color: 0 0% 100%;
+    --heart-icon-size: 2rem;
+    --heart-icon-opacity: 0.65;
+
+    /* Grid variables */
+    --grid-gap: 2rem;
+    --grid-border: none;
+  }
 }
 
 /* Product Card Component Styles */
@@ -570,6 +696,8 @@
     background-color: hsl(var(--product-image-bg));
     padding: var(--product-image-padding);
     border: var(--product-image-border);
+    border-radius: var(--product-image-border-radius, 0);
+    overflow: hidden;
   }
 
   .product-image {
@@ -652,6 +780,25 @@
     fill: hsl(349.63deg 82.68% 45.29%);
   }
 
+  /* VOX theme custom heart icon */
+  .vox-heart-icon {
+    width: 38px;
+    height: 36px;
+    transition: all 0.2s ease;
+    opacity: var(--heart-icon-opacity);
+  }
+
+  .vox-heart-icon.is-favorite {
+    opacity: 1;
+  }
+
+  /* VOX theme custom star icon */
+  .vox-star-icon {
+    width: 12px;
+    height: 11px;
+    margin-left: 0.25rem;
+  }
+
   .product-badges {
     position: absolute;
     top: var(--badge-position-top);
@@ -689,9 +836,61 @@
     text-transform: var(--badge-text-transform);
   }
 
+  /* VOX theme specific badges */
+  .vox-age-badge {
+    position: absolute;
+    top: var(--vox-age-badge-position-top);
+    left: var(--vox-age-badge-position-left);
+    background-color: hsl(var(--vox-age-badge-bg));
+    color: hsl(var(--vox-age-badge-color));
+    font-size: var(--vox-age-badge-font-size);
+    font-weight: var(--vox-age-badge-font-weight);
+    padding: var(--vox-age-badge-padding);
+    border-radius: var(--vox-age-badge-border-radius);
+    z-index: 10;
+  }
+
+  .vox-advance-badge {
+    position: absolute;
+    bottom: var(--vox-advance-badge-position-bottom);
+    left: var(--vox-advance-badge-position-left);
+    transform: var(--vox-advance-badge-transform);
+    background-color: hsl(var(--vox-advance-badge-bg));
+    color: hsl(var(--vox-advance-badge-color));
+    font-size: var(--vox-advance-badge-font-size);
+    font-weight: var(--vox-advance-badge-font-weight);
+    padding: var(--vox-advance-badge-padding);
+    border-radius: var(--vox-advance-badge-border-radius);
+    width: var(--vox-advance-badge-width);
+    text-align: var(--vox-advance-badge-text-align);
+    z-index: 10;
+  }
+
+  .vox-rating-badge {
+    background-color: hsl(var(--vox-rating-badge-bg));
+    color: hsl(var(--vox-rating-badge-color));
+    font-size: var(--vox-rating-badge-font-size);
+    font-weight: var(--vox-rating-badge-font-weight);
+    padding: var(--vox-rating-badge-padding);
+    border-radius: var(--vox-rating-badge-border-radius);
+    margin: var(--vox-rating-badge-margin);
+    display: flex;
+    align-items: center;
+  }
+
+  .vox-category-badge {
+    background-color: hsl(var(--vox-category-badge-bg));
+    color: hsl(var(--vox-category-badge-color));
+    font-size: var(--vox-category-badge-font-size);
+    font-weight: var(--vox-category-badge-font-weight);
+    padding: var(--vox-category-badge-padding);
+    border-radius: var(--vox-category-badge-border-radius);
+  }
+
   .product-content {
     padding: var(--product-content-padding);
     text-align: var(--product-content-text-align);
+    background-color: hsl(var(--product-content-bg, var(--card)));
   }
 
   /* Lululemon specific content styles */
@@ -708,6 +907,7 @@
     overflow: var(--product-title-overflow);
     text-overflow: var(--product-title-text-overflow);
     white-space: var(--product-title-white-space);
+    font-family: var(--product-title-font-family);
   }
 
   [data-theme="lego"] .product-card:hover .product-title {
@@ -965,6 +1165,12 @@
     color: hsl(0, 0%, 0%);
     font-size: 0.875rem;
   }
+
+  /* VOX theme specific styles */
+  [data-theme="vox"] .vox-badges-container {
+    display: flex;
+    margin-top: 1rem;
+  }
 }
 
 .product-title {
@@ -1032,4 +1238,10 @@
 [data-theme="that"] .product-badge[data-badge-type="sale"] {
   color: hsl(345.71 100% 32.94%);
   border-color: hsl(345.71 100% 32.94%);
+}
+
+/* VOX theme specific background */
+[data-theme="vox"] body {
+  background-color: hsl(240 25% 5%);
+  color: hsl(0 0% 100%);
 }

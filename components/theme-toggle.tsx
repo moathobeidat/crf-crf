@@ -2,10 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function ThemeToggle() {
   const [currentTheme, setCurrentTheme] = useState<string>("lululemon");
   const [mounted, setMounted] = useState(false);
+  const isMobile = useIsMobile();
 
   // Get the initial theme from the DOM on mount
   useEffect(() => {
@@ -71,8 +80,43 @@ export function ThemeToggle() {
     }, 50);
   };
 
+  // Use a dropdown menu on mobile
+  if (isMobile) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className="w-full justify-between">
+            {currentTheme === "lego" && "Lego Theme"}
+            {currentTheme === "that" && "THAT Theme"}
+            {currentTheme === "lululemon" && "Lululemon Theme"}
+            {currentTheme === "vox" && "VOX Theme"}
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[200px]">
+          <DropdownMenuItem onClick={() => changeTheme("lego")} disabled={currentTheme === "lego"}>
+            Apply Lego
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => changeTheme("that")} disabled={currentTheme === "that"}>
+            Apply THAT
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => changeTheme("lululemon")}
+            disabled={currentTheme === "lululemon"}
+          >
+            Apply Lululemon
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => changeTheme("vox")} disabled={currentTheme === "vox"}>
+            Apply VOX
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
+
+  // Use buttons on desktop
   return (
-    <div className="flex flex-nowrap gap-2">
+    <div className="flex flex-wrap gap-2">
       <Button
         onClick={() => changeTheme("lego")}
         variant={currentTheme === "lego" ? "default" : "outline"}
@@ -96,6 +140,14 @@ export function ThemeToggle() {
         disabled={currentTheme === "lululemon"}
       >
         Apply Lululemon
+      </Button>
+      <Button
+        onClick={() => changeTheme("vox")}
+        variant={currentTheme === "vox" ? "default" : "outline"}
+        className="rounded-full px-4 py-2 transition-all"
+        disabled={currentTheme === "vox"}
+      >
+        Apply VOX
       </Button>
     </div>
   );

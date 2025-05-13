@@ -178,6 +178,14 @@ function processVariablesIntoCss(variablesData: any): string {
     });
   });
 
+  // Variable reference map for resolving aliases
+  const varIdToName: { [id: string]: string } = {};
+  Object.entries(variables).forEach(([id, variable]: [string, any]) => {
+    // Store the mapping from variable ID to CSS variable name
+    const varName = variable.name.toLowerCase().replace(/\s+/g, "-").replace(/\//g, "-");
+    varIdToName[variable.id] = varName;
+  });
+
   // First pass: Process primitive variables (from collections with single mode)
   Object.entries(variables).forEach(([id, variable]: [string, any]) => {
     // Check if this variable belongs to a primitive collection
@@ -187,10 +195,21 @@ function processVariablesIntoCss(variablesData: any): string {
 
       // Get the value from the first mode
       const modeId = Object.keys(variable.valuesByMode)[0];
-      const value = variable.valuesByMode[modeId];
+      let value = variable.valuesByMode[modeId];
 
-      // Process based on variable type
-      if (variable.resolvedType === "COLOR") {
+      // handle variable aliases
+      if (value && typeof value === "object" && value.type === "VARIABLE_ALIAS") {
+        // This is a reference to another variable
+        console.log(`Found variable alias for ${varName}:`, value);
+        const referencedVarName = varIdToName[value.id];
+        console.log(`Resolved variable alias ${value.id} to ${referencedVarName}`);
+        if (referencedVarName) {
+          primitiveVars[varName] = `var(--${referencedVarName})`;
+        } else {
+          primitiveVars[varName] = "initial"; // Fallback if reference not found
+        }
+      } else if (variable.resolvedType === "COLOR") {
+        // Process based on variable type
         primitiveVars[varName] = figmaColorToCssHsl(value);
       } else if (variable.resolvedType === "FLOAT") {
         primitiveVars[varName] = addPxSuffix(value, varName, variable.resolvedType);
@@ -201,14 +220,6 @@ function processVariablesIntoCss(variablesData: any): string {
         primitiveVars[varName] = value.toString();
       }
     }
-  });
-
-  // Variable reference map for resolving aliases
-  const varIdToName: { [id: string]: string } = {};
-  Object.entries(variables).forEach(([id, variable]: [string, any]) => {
-    // Store the mapping from variable ID to CSS variable name
-    const varName = variable.name.toLowerCase().replace(/\s+/g, "-").replace(/\//g, "-");
-    varIdToName[variable.id] = varName;
   });
 
   // Second pass: Process semantic variables with references

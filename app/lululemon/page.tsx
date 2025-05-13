@@ -206,6 +206,8 @@ export default function Lululemon() {
         return "THAT";
       case "lululemon":
         return "Lululemon";
+      case "vox":
+        return "VOX";
       default:
         return "Lululemon";
     }

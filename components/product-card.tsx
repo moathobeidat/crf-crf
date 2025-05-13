@@ -92,6 +92,87 @@ export function ProductCard({
     return <Card className={cn("overflow-hidden product-card", className)}></Card>;
   }
 
+  // Special handling for VOX theme
+  if (mounted && currentTheme === "vox") {
+    // Generate a random age rating for each product
+    const ageRatings = ["G", "PG", "PG-13", "PG-15", "R"];
+    // Use the product ID to ensure consistent rating for the same product
+    const ageRatingIndex = Number.parseInt(id.slice(-1), 10) % ageRatings.length;
+    const ageRating = ageRatings[ageRatingIndex];
+
+    // Generate a random rating for each product (between 3.0 and 5.0)
+    const rating = (3 + (Number.parseInt(id.slice(-2), 10) % 20) / 10).toFixed(1);
+
+    return (
+      <Card
+        ref={cardRef}
+        className={cn(
+          "overflow-hidden product-card",
+          className,
+          isTransitioning && "theme-transition-active"
+        )}
+      >
+        <div className="relative product-image-container">
+          {/* Age Rating Badge */}
+          <div className="vox-age-badge">
+            PG {ageRating.includes("PG") ? ageRating.split("PG-")[1] : ""}
+          </div>
+
+          {/* Favorite button */}
+          <button
+            onClick={() => onToggleFavorite?.(id)}
+            className="favorite-button"
+            aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          >
+            <Image
+              src="/images/vox-heart.svg"
+              alt="Favorite"
+              width={38}
+              height={36}
+              className={cn("vox-heart-icon", isFavorite ? "is-favorite" : "")}
+            />
+          </button>
+
+          {/* Product image */}
+          <div className="product-image-wrapper">
+            <Image
+              src={imageUrl || "/placeholder.svg"}
+              alt={title}
+              fill
+              className="product-image"
+              priority
+            />
+          </div>
+
+          {/* Advance Open Badge */}
+          <div className="vox-advance-badge">Advance Open</div>
+        </div>
+
+        {/* Movie info */}
+        <CardContent className="product-content">
+          <h3 className="product-title" data-title-id={id}>
+            {decodeString(title)}
+          </h3>
+
+          {/* Rating and Category Badges */}
+          <div className="vox-badges-container">
+            <div className="vox-rating-badge">AE</div>
+            <div className="vox-rating-badge">
+              {rating}
+              <Image
+                src="/images/vox-star.svg"
+                alt="Star"
+                width={12}
+                height={11}
+                className="vox-star-icon"
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   // Render the custom heart icon for THAT theme, or the default Heart component for other themes
   const renderHeartIcon = () => {
     if (currentTheme === "that") {
