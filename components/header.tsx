@@ -181,12 +181,12 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
             {/* Delivery options */}
             <div className="bg-white">
               <div className="container mx-auto">
-                <div className="flex">
+                <div className="flex overflow-x-auto">
                   {config.deliveryOptions.map((option, index) => (
                     <Link
                       key={option.id}
                       href={`#${option.id}`}
-                      className={`py-4 px-8 flex items-center justify-center text-sm font-medium ${
+                      className={`py-4 px-4 md:px-8 flex items-center justify-center text-sm font-medium whitespace-nowrap ${
                         option.id === "now"
                           ? "bg-[#0e5aa7] text-white rounded-t-lg"
                           : "bg-white text-gray-700 hover:bg-gray-100"
@@ -213,12 +213,12 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                       alt={config.logoAlt}
                       width={config.logoWidth}
                       height={config.logoHeight}
-                      className="h-10 w-auto"
+                      className="h-8 w-auto"
                     />
                   </Link>
 
                   {/* Search */}
-                  <div className="flex-1 mx-8 hidden md:block">
+                  <div className="flex-1 mx-4 lg:mx-8 hidden md:block">
                     <div className="relative">
                       <div className="flex items-center bg-white rounded-full overflow-hidden">
                         <Search className="w-5 h-5 text-gray-400 ml-4" />
@@ -231,8 +231,8 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     </div>
                   </div>
 
-                  {/* Location */}
-                  <div className="hidden md:flex items-start mr-6">
+                  {/* Location - Hide on smaller screens */}
+                  <div className="hidden lg:flex items-start mr-4">
                     <MapPin className="w-5 h-5 text-white mr-2 flex-shrink-0 mt-0.5" />
                     <div>
                       <div className="text-sm font-medium">{config.deliveryTime}</div>
@@ -240,14 +240,14 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     </div>
                   </div>
 
-                  {/* User menu */}
-                  <div className="hidden md:flex items-center mr-6">
+                  {/* User menu - Hide on smaller screens */}
+                  <div className="hidden md:flex items-center mr-4">
                     <User className="h-5 w-5 mr-2" />
-                    <span className="text-sm font-medium">Login & Register</span>
+                    <span className="text-sm font-medium">Login</span>
                   </div>
 
-                  {/* Language selector */}
-                  <div className="hidden md:flex items-center mr-6">
+                  {/* Language selector - Hide on smaller screens */}
+                  <div className="hidden md:flex items-center mr-4">
                     <button className="flex items-center">
                       <Image
                         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=24&width=24&query=UAE+flag"
@@ -299,17 +299,15 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
 
             {/* Mobile menu */}
             {isMobileMenuOpen && (
-              <div className="md:hidden bg-blue-800 text-white fixed inset-0 z-50 pt-16">
+              <div className="md:hidden fixed inset-0 bg-blue-800 text-white z-50 overflow-y-auto pt-16">
                 <div className="container mx-auto px-4 py-4">
-                  <div className="mb-4">
-                    <div className="flex items-center bg-white rounded-full overflow-hidden">
-                      <Search className="w-5 h-5 text-gray-400 ml-4" />
-                      <input
-                        type="text"
-                        placeholder={config.searchPlaceholder}
-                        className="w-full py-3 pl-2 pr-4 focus:outline-none text-gray-700"
-                      />
-                    </div>
+                  <div className="mb-4 relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder={config.searchPlaceholder}
+                      className="w-full py-3 pl-10 pr-4 bg-white rounded-full focus:outline-none text-gray-700"
+                    />
                   </div>
 
                   <div className="mb-6">
@@ -418,12 +416,12 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                   </Link>
 
                   {/* Navigation */}
-                  <nav className="hidden md:flex items-center ml-12">
+                  <nav className="hidden md:flex items-center ml-4 lg:ml-12 overflow-x-auto">
                     {config.navItems.map((item) => (
                       <Link
                         key={item.label}
                         href={item.href}
-                        className="text-sm font-medium hover:text-gray-300 flex items-center px-4"
+                        className="text-sm font-medium hover:text-gray-300 flex items-center px-2 lg:px-4 whitespace-nowrap"
                       >
                         {item.label}
                         {item.hasDropdown && <ChevronDown className="w-4 h-4 ml-1 opacity-70" />}
@@ -438,17 +436,22 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                         <input
                           type="text"
                           placeholder={config.searchPlaceholder}
-                          className="w-64 py-2 pl-4 pr-8 text-gray-900 placeholder-gray-500 focus:outline-none"
+                          className="w-32 lg:w-64 py-2 pl-4 pr-8 text-gray-900 placeholder-gray-500 focus:outline-none"
                         />
                         <Search className="w-5 h-5 text-gray-500" />
                       </div>
                     </div>
 
-                    {/* Login/Sign Up */}
-                    <div className="flex items-center bg-[#1a1a24] rounded-full px-4 py-2">
-                      <User className="h-5 w-5 mr-2 text-gray-300" />
-                      <span className="text-sm font-medium">Login / Sign Up</span>
+                    {/* Login/Sign Up - Hide text on small screens */}
+                    <div className="hidden sm:flex items-center bg-[#1a1a24] rounded-full px-4 py-2">
+                      <User className="h-5 w-5 mr-0 sm:mr-2 text-gray-300" />
+                      <span className="text-sm font-medium hidden sm:inline">Login / Sign Up</span>
                     </div>
+
+                    {/* Mobile login icon */}
+                    <button className="p-2 sm:hidden">
+                      <User className="h-5 w-5 text-gray-300" />
+                    </button>
 
                     {/* Mobile menu button */}
                     <button className="ml-4 md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -461,34 +464,47 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
 
             {/* Mobile menu */}
             {isMobileMenuOpen && (
-              <div className="md:hidden bg-[#0c0c17] text-white">
-                <div className="container mx-auto px-4 py-2">
-                  <div className="mb-4">
-                    <div className="flex items-center bg-white rounded-full overflow-hidden pr-2">
-                      <input
-                        type="text"
-                        placeholder={config.searchPlaceholder}
-                        className="w-full py-2 pl-4 pr-8 text-gray-900 placeholder-gray-500 focus:outline-none"
-                      />
-                      <Search className="w-5 h-5 text-gray-500" />
+              <div className="md:hidden fixed inset-0 bg-[#0c0c17] text-white z-50 overflow-y-auto pt-16">
+                <div className="container mx-auto px-4 py-4">
+                  <div className="mb-4 relative">
+                    <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" />
+                    <input
+                      type="text"
+                      placeholder={config.searchPlaceholder}
+                      className="w-full py-2 pl-4 pr-10 bg-white rounded-full text-gray-900 placeholder-gray-500 focus:outline-none"
+                    />
+                  </div>
+                  <div className="mb-6">
+                    {config.navItems.map((item) => (
+                      <div key={item.label} className="border-b border-gray-800">
+                        <Link
+                          href={item.href}
+                          className="block py-3 text-white hover:text-gray-300 flex items-center justify-between"
+                          onClick={() => !item.hasDropdown && setIsMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                          {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-gray-800">
+                    <Link href="/login" className="flex items-center py-3 text-white hover:text-gray-300">
+                      <User className="h-5 w-5 mr-3" />
+                      <span>Login / Sign Up</span>
+                    </Link>
+                    <div className="flex items-center py-3">
+                      <MapPin className="h-5 w-5 mr-3 text-gray-400" />
+                      <span className="text-sm">{config.cinemaSelector}</span>
                     </div>
                   </div>
-                  {config.navItems.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="block py-2 text-white hover:bg-gray-800 flex items-center justify-between"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.label}
-                      {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
-                    </Link>
-                  ))}
-                  <div className="mt-4 pt-4 border-t border-gray-800">
-                    <Link href="/login" className="block py-2 text-white hover:bg-gray-800">
-                      Login / Sign Up
-                    </Link>
-                  </div>
+                  {/* Close button */}
+                  <button
+                    className="absolute top-4 right-4 p-2 rounded-full bg-[#1a1a24]"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
                 </div>
               </div>
             )}
@@ -512,11 +528,11 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
-                  PLAY ZONE
+                  <span className="hidden sm:inline">PLAY ZONE</span>
                 </Link>
 
-                {/* Promo Carousel */}
-                <div className="flex-1 flex items-center justify-center">
+                {/* Promo Carousel - Hide on small screens */}
+                <div className="hidden sm:flex flex-1 items-center justify-center">
                   <button className="p-1 mr-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -556,8 +572,8 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                   </button>
                 </div>
 
-                {/* Login and Rewards */}
-                <div className="flex items-center space-x-4">
+                {/* Login and Rewards - Hide on small screens */}
+                <div className="hidden sm:flex items-center space-x-4">
                   <Link href="/login" className="flex items-center text-sm font-medium">
                     <div className="w-5 h-5 bg-red-600 flex items-center justify-center rounded-sm mr-1.5">
                       <User className="w-3 h-3 text-white" />
@@ -612,7 +628,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     {/* Navigation */}
                     <nav className="hidden md:flex items-center space-x-8 ml-8">
                       {config.navItems.map((item) => (
-                        <Link key={item.label} href={item.href} className="text-sm  hover:opacity-80">
+                        <Link key={item.label} href={item.href} className="text-sm hover:opacity-80">
                           {item.label}
                         </Link>
                       ))}
@@ -624,8 +640,8 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                         <Search className="w-5 h-5" />
                       </button>
 
-                      {/* Wishlist */}
-                      <button className="p-2 rounded-full hover:bg-yellow-500 relative ml-2">
+                      {/* Wishlist - Hide on smallest screens */}
+                      <button className="p-2 rounded-full hover:bg-yellow-500 relative ml-2 hidden sm:block">
                         <Heart className="w-5 h-5" />
                         {wishlistCount > 0 && (
                           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -644,8 +660,8 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                         )}
                       </button>
 
-                      {/* Location */}
-                      <button className="p-2 rounded-full hover:bg-yellow-500 flex items-center ml-2">
+                      {/* Location - Hide on small screens */}
+                      <button className="p-2 rounded-full hover:bg-yellow-500 hidden md:flex items-center ml-2">
                         <span className="text-sm font-medium mr-1">{config.location}</span>
                         <ChevronDown className="w-4 h-4" />
                       </button>
@@ -662,20 +678,62 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
 
             {/* Mobile menu */}
             {isMobileMenuOpen && (
-              <div className="md:hidden bg-yellow-300">
-                <div className="w-full">
-                  <div className="max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 py-2">
+              <div className="md:hidden fixed inset-0 bg-yellow-300 z-50 pt-16 overflow-y-auto">
+                <div className="container mx-auto px-4 py-4">
+                  <div className="mb-6">
+                    <div className="relative border-b border-yellow-400 pb-4 mb-4">
+                      <input
+                        type="text"
+                        placeholder="Search"
+                        className="w-full py-2 pl-10 pr-4 bg-white rounded-full focus:outline-none"
+                      />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" />
+                    </div>
                     {config.navItems.map((item) => (
                       <Link
                         key={item.label}
                         href={item.href}
-                        className="block py-2 font-bold hover:bg-yellow-400"
+                        className="block py-3 font-bold text-lg border-b border-yellow-400"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {item.label}
                       </Link>
                     ))}
                   </div>
+                  <div className="mt-6 pt-4 border-t border-yellow-400">
+                    <Link href="/login" className="flex items-center py-3 border-b border-yellow-400">
+                      <div className="w-5 h-5 bg-red-600 flex items-center justify-center rounded-sm mr-3">
+                        <User className="w-3 h-3 text-white" />
+                      </div>
+                      <span>Log In</span>
+                    </Link>
+                    <Link href="/rewards" className="flex items-center py-3 border-b border-yellow-400">
+                      <div className="w-5 h-5 bg-yellow-500 flex items-center justify-center rounded-full mr-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3 w-3"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
+                        </svg>
+                      </div>
+                      <span>Brick Rewards</span>
+                    </Link>
+                  </div>
+                  {/* Close button */}
+                  <button
+                    className="absolute top-4 right-4 p-2 rounded-full bg-yellow-400"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
                 </div>
               </div>
             )}
@@ -707,7 +765,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
               <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between">
                   {/* Logo */}
-                  <Link href="/lululemon" className="flex-shrink-0 mr-12">
+                  <Link href="/lululemon" className="flex-shrink-0 mr-4 md:mr-12">
                     <Image
                       src={config.logo || "/placeholder.svg"}
                       alt={config.logoAlt}
@@ -718,7 +776,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                   </Link>
 
                   {/* Navigation */}
-                  <nav className="hidden md:flex items-center space-x-8">
+                  <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
                     {config.navItems.map((item) => (
                       <Link
                         key={item.label}
@@ -730,18 +788,23 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     ))}
                   </nav>
 
-                  <div className="flex items-center ml-auto space-x-4">
-                    {/* Search */}
-                    <div className="relative border-b border-gray-300 flex items-center">
+                  <div className="flex items-center ml-auto space-x-2 md:space-x-4">
+                    {/* Search - Hide on small screens */}
+                    <div className="relative border-b border-gray-300 hidden md:flex items-center">
                       <input
                         type="text"
                         placeholder="Search"
-                        className="w-48 py-1.5 pl-0 pr-8 bg-transparent focus:outline-none text-sm"
+                        className="w-32 lg:w-48 py-1.5 pl-0 pr-8 bg-transparent focus:outline-none text-sm"
                       />
                       <button className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-500">
                         <Search className="w-5 h-5" />
                       </button>
                     </div>
+
+                    {/* Search icon for mobile */}
+                    <button className="p-1 md:hidden">
+                      <Search className="h-6 w-6" />
+                    </button>
 
                     {/* User menu */}
                     <button className="p-1">
@@ -769,26 +832,29 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
 
             {/* Mobile menu */}
             {isMobileMenuOpen && (
-              <div className="md:hidden fixed inset-0 bg-white z-40 overflow-y-auto pt-32">
+              <div className="md:hidden fixed inset-0 bg-white z-50 overflow-y-auto pt-16">
                 <div className="container mx-auto px-4 py-4">
-                  <div className="mb-4">
+                  <div className="mb-4 relative border-b border-gray-200 pb-4">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <input
                       type="text"
                       placeholder="Search"
-                      className="w-full py-2 pl-4 pr-10 border-b border-gray-300 bg-transparent focus:outline-none"
+                      className="w-full py-2 pl-10 pr-4 bg-gray-100 rounded-md focus:outline-none"
                     />
                   </div>
-                  {config.navItems.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="block py-3 font-medium uppercase border-b border-gray-200"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                  <div className="mt-6 pt-4">
+                  <div className="mb-6">
+                    {config.navItems.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="block py-3 font-medium uppercase border-b border-gray-200"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-gray-200">
                     <Link
                       href="/track-order"
                       className="block py-3 text-sm border-b border-gray-200"
@@ -802,6 +868,13 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                       <ChevronDown className="w-4 h-4 ml-auto" />
                     </button>
                   </div>
+                  {/* Close button */}
+                  <button
+                    className="absolute top-4 right-4 p-2 rounded-full bg-gray-100"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
                 </div>
               </div>
             )}
@@ -827,15 +900,13 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
             <header className={`${config.primaryColor} ${config.textColor} py-4`}>
               <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between">
-                  {/* Left section with categories */}
-                  <div className="flex items-center space-x-4">
+                  {/* Left section with categories - Hide on mobile */}
+                  <div className="hidden md:flex items-center space-x-4">
                     {config.categories?.map((category) => (
                       <Link
                         key={category.label}
                         href={category.href}
-                        className={`px-4 py-1 text-sm font-medium uppercase ${
-                          category.isActive ? "bg-yellow-400" : ""
-                        }`}
+                        className={`px-4 py-1 text-sm font-medium uppercase ${category.isActive ? "bg-yellow-400" : ""}`}
                       >
                         {category.label}
                       </Link>
@@ -843,7 +914,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                   </div>
 
                   {/* Center logo */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2">
+                  <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
                     <Link href="/that" className="flex-shrink-0">
                       <Image
                         src={config.logo || "/placeholder.svg"}
@@ -860,11 +931,11 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     {/* Search */}
                     <div className="flex items-center">
                       <Search className="w-5 h-5" />
-                      <span className="ml-2 text-sm">Search</span>
+                      <span className="ml-2 text-sm hidden sm:inline">Search</span>
                     </div>
 
-                    {/* Language selector */}
-                    <div className="flex items-center">
+                    {/* Language selector - Hide on small screens */}
+                    <div className="hidden sm:flex items-center">
                       <div className="flex items-center">
                         <Image
                           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=20&width=20&query=UAE+flag+circle"
@@ -882,8 +953,8 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                       <User className="h-5 w-5" />
                     </Link>
 
-                    {/* Wishlist */}
-                    <Link href="/wishlist" className="relative">
+                    {/* Wishlist - Hide on smallest screens */}
+                    <Link href="/wishlist" className="relative hidden sm:block">
                       <Heart className="w-5 h-5" />
                       {wishlistCount > 0 && (
                         <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -901,13 +972,18 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                         </span>
                       )}
                     </Link>
+
+                    {/* Mobile menu button - only visible on mobile */}
+                    <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                      {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                    </button>
                   </div>
                 </div>
               </div>
             </header>
 
-            {/* Navigation */}
-            <nav className="py-3">
+            {/* Navigation - Hide on mobile */}
+            <nav className="py-3 hidden md:block">
               <div className="container mx-auto px-4">
                 <div className="flex items-center justify-center space-x-6 overflow-x-auto">
                   {config.navItems.map((item) => (
@@ -923,18 +999,18 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
               </div>
             </nav>
 
-            {/* Mobile menu button - only visible on mobile */}
-            <button
-              className="fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md md:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-
             {/* Mobile menu */}
             {isMobileMenuOpen && (
-              <div className="md:hidden fixed inset-0 bg-white z-40 overflow-y-auto pt-16">
+              <div className="md:hidden fixed inset-0 bg-white z-50 overflow-y-auto pt-16">
                 <div className="container mx-auto px-4 py-4">
+                  <div className="mb-4 relative border-b border-gray-200 pb-4">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      className="w-full py-2 pl-10 pr-4 bg-gray-100 rounded-md focus:outline-none"
+                    />
+                  </div>
                   <div className="mb-6">
                     <h3 className="font-bold text-lg mb-3">Shop by Category</h3>
                     {config.categories?.map((category) => (
@@ -953,7 +1029,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                       <Link
                         key={item.label}
                         href={item.href}
-                        className={cn("block py-2 text-base", item.className)}
+                        className={cn("block py-2 text-base border-b border-gray-100", item.className)}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {item.label}
@@ -976,6 +1052,13 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                       <span>English</span>
                     </div>
                   </div>
+                  {/* Close button */}
+                  <button
+                    className="absolute top-4 right-4 p-2 rounded-full bg-gray-100"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
                 </div>
               </div>
             )}
