@@ -2,7 +2,7 @@ common-app:
   replicaCount: 1
   image:
     repository: 243060292047.dkr.ecr.eu-west-1.amazonaws.com/crf-demo1
-    tag: "main-crf-demo1-b9fab37f"
+    tag: "main-crf-demo1-aa00e536"
   fullnameOverride: "crf-demo1"
   serviceAccount:
     create: true

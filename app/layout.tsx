@@ -24,9 +24,12 @@ export const metadata: Metadata = {
   generator: "Customer Solutions",
 };
 
+// Update the links array to include Carrefour
 const links: { href: string; label: string }[] = [
   { href: "/", label: "Lego" },
   { href: "/lululemon", label: "Lululemon" },
+  { href: "/vox", label: "VOX" },
+  { href: "/carrefour", label: "Carrefour" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

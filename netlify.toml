@@ -1,19 +1,9 @@
 [build]
-  command = "npm run build"
-  publish = ".next"
+  command = "rm -rf .next node_modules/.cache && npm run build"
+  publish = "out"
 
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
-    Pragma = "no-cache"
-    Expires = "0"
-    Surrogate-Control = "no-store"
+[build.processing]
+  skip_processing = true
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

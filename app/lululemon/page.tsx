@@ -6,7 +6,7 @@ import { ProductGridSkeleton } from "@/components/product-grid-skeleton";
 import { toast } from "@/components/ui/use-toast";
 import { useSearch } from "@/lib/hooks/use-search";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ThemeDebug } from "@/components/theme-debug";
+import { Header } from "@/components/header";
 
 export default function Lululemon() {
   const { results, isLoading, error, updateParams, setKeyword } = useSearch({
@@ -18,6 +18,8 @@ export default function Lululemon() {
 
   // Track favorite products
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const [cartCount, setCartCount] = useState(1);
+  const [wishlistCount, setWishlistCount] = useState(0);
 
   // Track current theme for UI updates
   const [currentTheme, setCurrentTheme] = useState<string>("lululemon");
@@ -28,7 +30,7 @@ export default function Lululemon() {
     // Check if there's a manually set theme in localStorage
     const storedTheme = localStorage.getItem("theme");
 
-    if (storedTheme && ["lululemon", "that", "lego"].includes(storedTheme)) {
+    if (storedTheme && ["lululemon", "that", "lego", "vox", "carrefour"].includes(storedTheme)) {
       console.log(`Using stored theme from localStorage: ${storedTheme}`);
       document.documentElement.setAttribute("data-theme", storedTheme);
       setCurrentTheme(storedTheme);
@@ -165,6 +167,9 @@ export default function Lululemon() {
     (id: string) => {
       setFavorites((prev) => {
         const newFavorites = { ...prev, [id]: !prev[id] };
+        // Update wishlist count
+        const newWishlistCount = Object.values(newFavorites).filter(Boolean).length;
+        setWishlistCount(newWishlistCount);
         return newFavorites;
       });
 
@@ -184,6 +189,7 @@ export default function Lululemon() {
     (id: string) => {
       const product = products().find((p) => p.id === id);
       if (product) {
+        setCartCount((prev) => prev + 1);
         toast({
           title: "Added to bag",
           description: product.title,
@@ -208,41 +214,54 @@ export default function Lululemon() {
         return "Lululemon";
       case "vox":
         return "VOX";
+      case "carrefour":
+        return "Carrefour";
       default:
         return "Lululemon";
     }
   };
 
+  // Convert currentTheme to the brand type expected by Header
+  const getCurrentBrand = () => {
+    // Make sure the theme is one of the valid brand options
+    if (["lululemon", "that", "lego", "vox", "carrefour"].includes(currentTheme)) {
+      return currentTheme as "lululemon" | "that" | "lego" | "vox" | "carrefour";
+    }
+    return "lululemon"; // Default fallback
+  };
+
   return (
-    <main className="container mx-auto py-10 px-4">
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8">
-        <h1 className="text-3xl font-light">{getThemeDisplayName()} Collection</h1>
-        <ThemeToggle />
-      </div>
-      {isLoading ? (
-        <ProductGridSkeleton />
-      ) : error ? (
-        <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-md">
-          <h2 className="text-lg font-semibold mb-2">Error loading products</h2>
-          <p>{error.message}</p>
-          <button
-            onClick={() =>
-              updateParams({ keyword: "lululemon", sortBy: "relevance", pageSize: 32 })
-            }
-            className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-          >
-            Try Again
-          </button>
+    <div>
+      {/* Pass the current theme as the brand prop */}
+      <Header brand={getCurrentBrand()} cartCount={cartCount} wishlistCount={wishlistCount} />
+      <main className="container mx-auto py-10 px-4">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-8">
+          <ThemeToggle />
         </div>
-      ) : (
-        <ProductGrid
-          key={`product-grid-${currentTheme}-${forceUpdateRef.current}`}
-          products={products()}
-          onToggleFavorite={handleToggleFavorite}
-          onAddToCart={handleAddToCart}
-        />
-      )}
-      <ThemeDebug />
-    </main>
+        {isLoading ? (
+          <ProductGridSkeleton />
+        ) : error ? (
+          <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-md">
+            <h2 className="text-lg font-semibold mb-2">Error loading products</h2>
+            <p>{error.message}</p>
+            <button
+              onClick={() =>
+                updateParams({ keyword: "lululemon", sortBy: "relevance", pageSize: 32 })
+              }
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : (
+          <ProductGrid
+            key={`product-grid-${currentTheme}-${forceUpdateRef.current}`}
+            products={products()}
+            onToggleFavorite={handleToggleFavorite}
+            onAddToCart={handleAddToCart}
+          />
+        )}
+      </main>
+    </div>
   );
 }

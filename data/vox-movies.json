@@ -1,0 +1,76 @@
+{
+  "movies": [
+    {
+      "id": "movie1",
+      "title": "Deadpool & Wolverine",
+      "imageUrl": "/images/movies/deadpool-wolverine.png",
+      "ageRating": "18+",
+      "advanceBadge": "Advance Open",
+      "rating": "4.8",
+      "category": "Action"
+    },
+    {
+      "id": "movie2",
+      "title": "Inside Out 2",
+      "imageUrl": "/images/movies/inside-out-2.png",
+      "ageRating": "PG",
+      "advanceBadge": "Now Showing",
+      "rating": "4.7",
+      "category": "Animation"
+    },
+    {
+      "id": "movie3",
+      "title": "Despicable Me 4",
+      "imageUrl": "/images/movies/despicable-me-4.png",
+      "ageRating": "PG",
+      "advanceBadge": "Now Showing",
+      "rating": "4.5",
+      "category": "Animation"
+    },
+    {
+      "id": "movie4",
+      "title": "A Quiet Place: Day One",
+      "imageUrl": "/images/movies/quiet-place.png",
+      "ageRating": "15+",
+      "advanceBadge": "Now Showing",
+      "rating": "4.6",
+      "category": "Horror"
+    },
+    {
+      "id": "movie5",
+      "title": "Twisters",
+      "imageUrl": "/images/movies/twisters.png",
+      "ageRating": "PG-13",
+      "advanceBadge": "Coming Soon",
+      "rating": "4.3",
+      "category": "Action"
+    },
+    {
+      "id": "movie6",
+      "title": "Bad Boys: Ride or Die",
+      "imageUrl": "/images/movies/bad-boys.png",
+      "ageRating": "18+",
+      "advanceBadge": "Now Showing",
+      "rating": "4.4",
+      "category": "Action"
+    },
+    {
+      "id": "movie7",
+      "title": "Longlegs",
+      "imageUrl": "/images/movies/longlegs.png",
+      "ageRating": "18+",
+      "advanceBadge": "Now Showing",
+      "rating": "4.9",
+      "category": "Horror"
+    },
+    {
+      "id": "movie8",
+      "title": "The Garfield Movie",
+      "imageUrl": "/images/movies/garfield.png",
+      "ageRating": "PG",
+      "advanceBadge": "Now Showing",
+      "rating": "4.2",
+      "category": "Animation"
+    }
+  ]
+}

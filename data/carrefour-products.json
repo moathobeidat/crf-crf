@@ -1,0 +1,92 @@
+{
+  "products": [
+    {
+      "id": "product1",
+      "title": "Driscoll's Strawberries 250g",
+      "price": "15.99",
+      "weight": "250g",
+      "imageUrl": "/images/c4/product-1.avif",
+      "badges": [{ "text": "Bestseller" }]
+    },
+    {
+      "id": "product2",
+      "title": "Red Currants 125g",
+      "price": "23.99",
+      "weight": "125g",
+      "imageUrl": "/images/c4/product-2.avif",
+      "badges": [{ "text": "" }]
+    },
+    {
+      "id": "product3",
+      "title": "Physalis 100g",
+      "price": "6.75",
+      "weight": "100g",
+      "imageUrl": "/images/c4/product-3.avif",
+      "badges": [{ "text": "Bestseller" }]
+    },
+    {
+      "id": "product4",
+      "title": "Blackberry 125g",
+      "price": "31.99",
+      "weight": "125g",
+      "imageUrl": "/images/c4/product-4.avif",
+      "badges": []
+    },
+    {
+      "id": "product5",
+      "title": "Blueberry Prepack",
+      "price": "6.89",
+      "weight": "125g",
+      "imageUrl": "/images/c4/product-5.avif",
+      "badges": [{ "text": "Bestseller" }]
+    },
+    {
+      "id": "product6",
+      "title": "Driscoll's Raspberries 125g",
+      "price": "13.29",
+      "weight": "125g",
+      "imageUrl": "/images/c4/product-6.avif",
+      "badges": []
+    },
+    {
+      "id": "product7",
+      "title": "Blackberry Prepacked 125g",
+      "price": "12.19",
+      "weight": "125g",
+      "imageUrl": "/images/c4/product-7.webp",
+      "badges": []
+    },
+    {
+      "id": "product8",
+      "title": "Les Domaines Blueberries",
+      "price": "46.99",
+      "weight": "500g",
+      "imageUrl": "/images/c4/product-8.avif",
+      "badges": []
+    },
+    {
+      "id": "product9",
+      "title": "Pure Harvest Strawberries 200g",
+      "price": "19.99",
+      "weight": "200g",
+      "imageUrl": "/images/c4/product-9.avif",
+      "badges": []
+    },
+    {
+      "id": "product10",
+      "title": "Driscoll's Strawberries 850g",
+      "price": "64.99",
+      "weight": "850g",
+      "imageUrl": "/images/c4/product-10.jpg",
+      "badges": []
+    },
+    {
+      "id": "product11",
+      "title": "Carrefour Blueberry 300g",
+      "price": "20.99",
+      "weight": "300g",
+      "imageUrl": "/images/c4/product-11.avif",
+      "badges": []
+    }
+  ]
+}

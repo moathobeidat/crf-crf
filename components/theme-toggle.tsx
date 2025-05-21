@@ -109,6 +109,12 @@ export function ThemeToggle() {
           <DropdownMenuItem onClick={() => changeTheme("vox")} disabled={currentTheme === "vox"}>
             Apply VOX
           </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => changeTheme("carrefour")}
+            disabled={currentTheme === "carrefour"}
+          >
+            Apply Carrefour
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     );
@@ -148,6 +154,14 @@ export function ThemeToggle() {
         disabled={currentTheme === "vox"}
       >
         Apply VOX
+      </Button>
+      <Button
+        onClick={() => changeTheme("carrefour")}
+        variant={currentTheme === "carrefour" ? "default" : "outline"}
+        className="rounded-full px-4 py-2 transition-all"
+        disabled={currentTheme === "carrefour"}
+      >
+        Apply Carrefour
       </Button>
     </div>
   );

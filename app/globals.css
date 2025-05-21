@@ -108,6 +108,30 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "montserrat";
+  src: url("/fonts/montserrat/0fb5d54cc1f5e91d-s.p.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "montserrato";
+  src: url("/fonts/montserrat/4f05ba3a6752a328-s.p.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "montserrato";
+  src: url("/fonts/montserrat/4f05ba3a6752a328-s.p.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   /* Base theme variables */
   :root {
@@ -658,6 +682,129 @@
     --grid-gap: 2rem;
     --grid-border: none;
   }
+
+  /* After the [data-theme="vox"] section, add the new Carrefour theme */
+
+  /* Carrefour theme - Pixel perfect match for grid layout */
+  [data-theme="carrefour"] {
+    /* Font Family */
+    --font-family-title: "montserrato", Arial, sans-serif;
+    --font-family-body: "montserrato", Arial, sans-serif;
+    --font-family-button: "montserrato", Arial, sans-serif;
+
+    /* Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --primary: 214 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 160 59% 35%;
+    --secondary-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+
+    /* Product card variables */
+    --product-card-padding: 0;
+    --product-card-border: none;
+    --product-card-border-radius: 0.75rem;
+    --product-card-shadow: none;
+    --product-card-bg: 0 0% 100%;
+
+    /* Product image variables */
+    --product-image-aspect-ratio: 1 / 1;
+    --product-image-padding: 0;
+    --product-image-bg: 0 0% 100%;
+    --product-image-border: 1px solid hsl(213.1deg 31.18% 81.76%);
+    --product-image-hover-scale: 1;
+    --product-image-object-fit: contain;
+    --product-image-border-radius: 0.75rem;
+
+    /* Product content variables */
+    --product-content-padding: 0;
+    --product-content-text-align: left;
+    --product-footer-padding: 0;
+
+    /* Product title variables */
+    --product-title-font-size: 0.875rem;
+    --product-title-font-weight: 500;
+    --product-title-color: 0 0% 13%;
+    --product-title-margin: 0.5rem 0 0;
+    --product-title-overflow: visible;
+    --product-title-text-overflow: clip;
+    --product-title-white-space: normal;
+    --product-title-line-height: 1.2;
+    --product-title-line-clamp: 2;
+
+    /* Product price variables */
+    --product-price-font-size: 1.25rem;
+    --product-price-font-weight: 900;
+    --product-price-color: 0 0% 13%;
+    --product-price-margin: 0.5rem 0 0;
+    --product-price-line-height: 1;
+
+    /* Favorite button variables - not used in Carrefour */
+    --favorite-button-bg: transparent;
+    --favorite-button-size: 0;
+    --favorite-button-position-top: 0;
+    --favorite-button-position-right: 0;
+    --favorite-button-position-left: 0;
+    --favorite-button-opacity: 0;
+    --favorite-button-border-radius: 0;
+    --heart-icon-color: 0 0% 0%;
+    --heart-icon-size: 0;
+
+    /* Add to cart button variables */
+    --add-to-cart-button-bg: 210.2 84.53% 35.49%;
+    --add-to-cart-button-color: 0 0% 100%;
+    --add-to-cart-button-height: 2rem;
+    --add-to-cart-button-width: 2rem;
+    --add-to-cart-button-radius: 50%;
+    --add-to-cart-button-font-size: 1rem;
+    --add-to-cart-button-font-weight: 400;
+    --add-to-cart-button-padding: 0;
+    --add-to-cart-button-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    --add-to-cart-button-border: 2px solid #fff;
+
+    /* Badge variables */
+    --badge-bg: 174.4 100% 29.41%;
+    --badge-color: 0 0% 100%;
+    --badge-font-size: 0.625rem;
+    --badge-font-weight: 700;
+    --badge-padding: 0.156rem 0.5rem;
+    --badge-border-radius: 0.75rem 0 0.75rem 0;
+    --badge-border: none;
+    --badge-position-top: 0;
+    --badge-position-right: auto;
+    --badge-position-bottom: auto;
+    --badge-position-left: 0;
+    --badge-text-transform: none;
+    --badge-gap: 0.5rem;
+
+    /* Carrefour specific variables */
+    --carrefour-weight-font-size: 0.75rem;
+    --carrefour-weight-font-weight: 400;
+    --carrefour-weight-color: 0 0% 50%;
+    --carrefour-weight-margin: 0 0 0.55rem;
+
+    --carrefour-price-superscript-font-size: 0.5rem;
+    --carrefour-price-superscript-top: -0.625rem;
+    --carrefour-price-superscript-font-weight: 700;
+
+    --carrefour-currency-font-size: 0.5rem;
+    --carrefour-currency-font-weight: 400;
+    --carrefour-currency-margin-left: 0;
+
+    --carrefour-now-badge-position-bottom: 0.25rem;
+    --carrefour-now-badge-position-left: 0.25rem;
+
+    /* Grid variables */
+    --grid-gap: 1rem;
+    --grid-border: none;
+  }
 }
 
 /* Product Card Component Styles */
@@ -716,6 +863,7 @@
     top: var(--favorite-button-position-top);
     left: var(--favorite-button-position-left);
     right: var(--favorite-button-position-right);
+    bottom: var(--favorite-button-position-bottom);
     width: var(--favorite-button-size);
     height: var(--favorite-button-size);
     border-radius: var(--favorite-button-border-radius);
@@ -908,6 +1056,7 @@
     text-overflow: var(--product-title-text-overflow);
     white-space: var(--product-title-white-space);
     font-family: var(--product-title-font-family);
+    line-height: var(--product-title-line-height, 1.2);
   }
 
   [data-theme="lego"] .product-card:hover .product-title {
@@ -920,6 +1069,7 @@
     font-weight: var(--product-price-font-weight);
     color: hsl(var(--product-price-color));
     margin: var(--product-price-margin);
+    line-height: var(--product-price-line-height, 1.2);
   }
 
   /* Add the specific style for THAT theme's discounted price */
@@ -1171,6 +1321,96 @@
     display: flex;
     margin-top: 1rem;
   }
+
+  /* Carrefour specific styles - Pixel perfect match */
+  .carrefour-weight {
+    font-size: var(--carrefour-weight-font-size);
+    font-weight: var(--carrefour-weight-font-weight);
+    color: hsl(var(--carrefour-weight-color));
+    margin: var(--carrefour-weight-margin);
+  }
+
+  .carrefour-price-container {
+    display: flex;
+    align-items: baseline;
+    line-height: 1;
+  }
+
+  .carrefour-price-main {
+    font-size: var(--product-price-font-size);
+    font-weight: var(--product-price-font-weight);
+    line-height: 1;
+  }
+
+  .carrefour-price-superscript {
+    font-size: var(--carrefour-price-superscript-font-size);
+    font-weight: var(--carrefour-price-superscript-font-weight);
+    position: relative;
+    top: var(--carrefour-price-superscript-top);
+    margin-left: 0.1rem;
+    line-height: 1;
+  }
+
+  .carrefour-currency {
+    font-size: var(--carrefour-currency-font-size);
+    font-weight: var(--carrefour-currency-font-weight);
+    margin-left: var(--carrefour-currency-margin-left);
+    line-height: 1;
+  }
+
+  .carrefour-now-badge {
+    position: absolute;
+    bottom: var(--carrefour-now-badge-position-bottom);
+    left: var(--carrefour-now-badge-position-left);
+    display: inline-flex;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .carrefour-add-button {
+    position: absolute;
+    bottom: var(--carrefour-now-badge-position-bottom);
+    right: var(--carrefour-now-badge-position-left);
+    width: var(--add-to-cart-button-width);
+    height: var(--add-to-cart-button-height);
+    background-color: hsl(var(--add-to-cart-button-bg));
+    color: hsl(var(--add-to-cart-button-color));
+    border-radius: var(--add-to-cart-button-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: var(--add-to-cart-button-shadow);
+    transition: background-color 0.2s ease;
+    border: var(--add-to-cart-button-border);
+  }
+
+  .carrefour-add-button:hover {
+    background-color: hsl(var(--add-to-cart-button-bg));
+  }
+
+  .carrefour-add-button svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    stroke-width: 3;
+  }
+
+  /* Carrefour bestseller badge */
+  [data-theme="carrefour"] .bestseller-badge {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    z-index: 10;
+  }
+
+  [data-theme="carrefour"] .bestseller-badge .product-badge {
+    background-color: hsl(var(--badge-bg));
+    color: hsl(var(--badge-color));
+    font-size: var(--badge-font-size);
+    font-weight: var(--badge-font-weight);
+    padding: var(--badge-padding);
+    border-radius: var(--badge-border-radius);
+  }
 }
 
 .product-title {
@@ -1244,4 +1484,16 @@
 [data-theme="vox"] body {
   background-color: hsl(240 25% 5%);
   color: hsl(0 0% 100%);
+}
+
+/* Carrefour theme specific styles */
+[data-theme="carrefour"] .product-title {
+  display: -webkit-box;
+  -webkit-line-clamp: var(--product-title-line-clamp);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+[data-theme="carrefour"] .product-card {
+  overflow: hidden;
 }

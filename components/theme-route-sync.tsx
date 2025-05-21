@@ -8,6 +8,8 @@ import { fetchFigmaThemeCSS, applyThemeCSS } from "@/lib/utils/figma-theme";
 const routeThemeMap: Record<string, string> = {
   "/": "lego",
   "/lululemon": "lululemon",
+  "/vox": "vox",
+  "/carrefour": "carrefour",
 };
 
 export function ThemeRouteSync() {
