@@ -250,7 +250,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                   <div className="hidden md:flex items-center mr-4">
                     <button className="flex items-center">
                       <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=24&width=24&query=UAE+flag"
+                        src="/placeholder.svg"
                         alt="UAE Flag"
                         width={24}
                         height={24}
@@ -388,7 +388,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     <Link href="#" className="flex items-center">
                       <span className="text-sm">العربية</span>
                       <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=20&width=30&query=UAE+flag"
+                        src="/placeholder.svg"
                         alt="UAE Flag"
                         width={20}
                         height={15}
@@ -546,7 +546,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                   </button>
                   <div className="flex items-center">
                     <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=30&width=30&query=LEGO+gift+box"
+                      src="/placeholder.svg"
                       alt="Gift"
                       width={30}
                       height={30}
@@ -938,7 +938,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     <div className="hidden sm:flex items-center">
                       <div className="flex items-center">
                         <Image
-                          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=20&width=20&query=UAE+flag+circle"
+                          src="/placeholder.svg"
                           alt="UAE Flag"
                           width={20}
                           height={20}
@@ -1043,7 +1043,7 @@ export function Header({ brand, cartCount = 0, wishlistCount = 0, isLoggedIn = f
                     </Link>
                     <div className="flex items-center py-2">
                       <Image
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=20&width=20&query=UAE+flag+circle"
+                        src="/placeholder.svg"
                         alt="UAE Flag"
                         width={20}
                         height={20}
