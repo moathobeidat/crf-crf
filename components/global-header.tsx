@@ -1,9 +1,10 @@
 "use client"
 
 import { useThemeCatalogue } from "@/lib/context/theme-catalogue-context"
-import { Check, ChevronDown } from "lucide-react"
+import { Check, ChevronDown, Heart } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 type Brand = "lego" | "lululemon" | "that" | "vox" | "carrefour"
 type Catalogue = "lego" | "lululemon" | "that" | "vox" | "carrefour"
@@ -43,90 +44,107 @@ export function GlobalHeader() {
 
   return (
     <div className="bg-white py-3 border-b border-gray-100 sticky top-0 z-50 shadow-sm text-gray-800">
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="w-1/2 pr-2">
-          <div className="relative">
-            <button
-              onClick={() => setThemeOpen(!themeOpen)}
-              className={cn(
-                "flex items-center justify-between w-full px-3 py-2 text-sm font-medium rounded-md transition-all",
-                "border border-transparent hover:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200",
-                "bg-white text-gray-800 hover:text-gray-900",
-                themeOpen ? "bg-gray-50" : "bg-white",
-              )}
-            >
-              <span>Theme: {selectedTheme.label}</span>
-              <ChevronDown
-                className={cn(
-                  "h-4 w-4 text-gray-500 transition-transform duration-200",
-                  themeOpen ? "transform rotate-180" : "",
-                )}
-              />
-            </button>
-
-            {themeOpen && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-100 py-1 z-10 text-gray-800">
-                {themeOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => {
-                      setTheme(option.value as Brand)
-                      setThemeOpen(false)
-                    }}
-                    className={cn(
-                      "flex items-center w-full px-3 py-2 text-sm text-gray-800 hover:bg-gray-50 hover:text-gray-900 transition-colors",
-                      theme === option.value ? "font-medium" : "font-normal",
-                    )}
-                  >
-                    <span className="flex-1">{option.label}</span>
-                    {theme === option.value && <Check className="h-4 w-4 text-gray-700" />}
-                  </button>
-                ))}
-              </div>
-            )}
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* Logo and tagline */}
+          <div className="flex flex-col items-center md:items-start">
+            <Image
+              src="/images/MAF_Logo_Bilingual_Left_RGB.jpg"
+              alt="Majid Al Futtaim"
+              width={180}
+              height={60}
+              className="h-auto"
+            />
+            <div className="text-xs text-gray-500 mt-1 flex items-center">
+              Made with <Heart className="h-3 w-3 mx-1 text-red-500 fill-red-500" /> by Customer Solutions
+            </div>
           </div>
-        </div>
 
-        <div className="w-1/2 pl-2">
-          <div className="relative">
-            <button
-              onClick={() => setCatalogueOpen(!catalogueOpen)}
-              className={cn(
-                "flex items-center justify-between w-full px-3 py-2 text-sm font-medium rounded-md transition-all",
-                "border border-transparent hover:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200",
-                "bg-white text-gray-800 hover:text-gray-900",
-                catalogueOpen ? "bg-gray-50" : "bg-white",
-              )}
-            >
-              <span>Catalogue: {selectedCatalogue.label}</span>
-              <ChevronDown
+          {/* Dropdowns container */}
+          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            {/* Theme dropdown */}
+            <div className="relative w-full sm:w-[180px]">
+              <button
+                onClick={() => setThemeOpen(!themeOpen)}
                 className={cn(
-                  "h-4 w-4 text-gray-500 transition-transform duration-200",
-                  catalogueOpen ? "transform rotate-180" : "",
+                  "flex items-center justify-between w-full px-3 py-2 text-sm font-medium rounded-md transition-all",
+                  "border border-transparent hover:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200",
+                  "bg-white text-gray-800 hover:text-gray-900",
+                  themeOpen ? "bg-gray-50" : "bg-white",
                 )}
-              />
-            </button>
+              >
+                <span>Theme: {selectedTheme.label}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 text-gray-500 transition-transform duration-200",
+                    themeOpen ? "transform rotate-180" : "",
+                  )}
+                />
+              </button>
 
-            {catalogueOpen && (
-              <div className="absolute top-full left-0 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-100 py-1 z-10 text-gray-800">
-                {catalogueOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => {
-                      setCatalogue(option.value as Catalogue)
-                      setCatalogueOpen(false)
-                    }}
-                    className={cn(
-                      "flex items-center w-full px-3 py-2 text-sm text-gray-800 hover:bg-gray-50 hover:text-gray-900 transition-colors",
-                      catalogue === option.value ? "font-medium" : "font-normal",
-                    )}
-                  >
-                    <span className="flex-1">{option.label}</span>
-                    {catalogue === option.value && <Check className="h-4 w-4 text-gray-700" />}
-                  </button>
-                ))}
-              </div>
-            )}
+              {themeOpen && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-100 py-1 z-10 text-gray-800">
+                  {themeOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => {
+                        setTheme(option.value as Brand)
+                        setThemeOpen(false)
+                      }}
+                      className={cn(
+                        "flex items-center w-full px-3 py-2 text-sm text-gray-800 hover:bg-gray-50 hover:text-gray-900 transition-colors",
+                        theme === option.value ? "font-medium" : "font-normal",
+                      )}
+                    >
+                      <span className="flex-1">{option.label}</span>
+                      {theme === option.value && <Check className="h-4 w-4 text-gray-700" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Catalogue dropdown */}
+            <div className="relative w-full sm:w-[180px]">
+              <button
+                onClick={() => setCatalogueOpen(!catalogueOpen)}
+                className={cn(
+                  "flex items-center justify-between w-full px-3 py-2 text-sm font-medium rounded-md transition-all",
+                  "border border-transparent hover:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200",
+                  "bg-white text-gray-800 hover:text-gray-900",
+                  catalogueOpen ? "bg-gray-50" : "bg-white",
+                )}
+              >
+                <span>Catalogue: {selectedCatalogue.label}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 text-gray-500 transition-transform duration-200",
+                    catalogueOpen ? "transform rotate-180" : "",
+                  )}
+                />
+              </button>
+
+              {catalogueOpen && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-100 py-1 z-10 text-gray-800">
+                  {catalogueOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => {
+                        setCatalogue(option.value as Catalogue)
+                        setCatalogueOpen(false)
+                      }}
+                      className={cn(
+                        "flex items-center w-full px-3 py-2 text-sm text-gray-800 hover:bg-gray-50 hover:text-gray-900 transition-colors",
+                        catalogue === option.value ? "font-medium" : "font-normal",
+                      )}
+                    >
+                      <span className="flex-1">{option.label}</span>
+                      {catalogue === option.value && <Check className="h-4 w-4 text-gray-700" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
