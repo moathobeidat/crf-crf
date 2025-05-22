@@ -1,0 +1,9 @@
+[build]
+  command = "rm -rf .next node_modules/.cache && npm run build"
+  publish = "out"
+
+[build.processing]
+  skip_processing = true
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
