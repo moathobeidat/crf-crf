@@ -47,19 +47,6 @@ export function GlobalHeader() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo and tagline */}
-          <div className="flex flex-col items-center md:items-start">
-            <Image
-              src="/images/MAF_Logo_Bilingual_Left_RGB.jpg"
-              alt="Majid Al Futtaim"
-              width={180}
-              height={60}
-              className="h-auto"
-            />
-            <div className="text-xs text-gray-500 mt-1 flex items-center">
-              Made with <Heart className="h-3 w-3 mx-1 text-red-500 fill-red-500" /> by Customer Solutions
-            </div>
-          </div>
-
           {/* Dropdowns container */}
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             {/* Theme dropdown */}
